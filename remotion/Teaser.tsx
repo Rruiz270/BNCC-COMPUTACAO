@@ -6,8 +6,12 @@ import {
   useVideoConfig,
   interpolate,
   spring,
+  Img,
+  staticFile,
 } from "remotion";
 import { COLORS, SLIDES } from "./constants";
+
+/* ───── Shared helpers ───── */
 
 function FadeIn({
   children,
@@ -20,7 +24,6 @@ function FadeIn({
   const { fps } = useVideoConfig();
   const opacity = spring({ frame: frame - delay, fps, config: { damping: 20 } });
   const translateY = interpolate(opacity, [0, 1], [30, 0]);
-
   return (
     <div style={{ opacity, transform: `translateY(${translateY}px)` }}>
       {children}
@@ -28,122 +31,165 @@ function FadeIn({
   );
 }
 
-function IntroSlide({ title, subtitle }: { title: string; subtitle: string }) {
+function SlideBackground({
+  children,
+  bg,
+  overlay = "rgba(6,24,64,0.82)",
+  image,
+}: {
+  children: React.ReactNode;
+  bg?: string;
+  overlay?: string;
+  image?: string;
+}) {
   return (
     <AbsoluteFill
       style={{
-        backgroundColor: COLORS.navyDark,
+        backgroundColor: bg ?? COLORS.navyDark,
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <FadeIn>
-        <div
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: 16,
-            backgroundColor: COLORS.cyan,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 24,
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <span
-            style={{ color: COLORS.white, fontSize: 32, fontWeight: 700 }}
-          >
-            i10
-          </span>
-        </div>
-      </FadeIn>
-      <FadeIn delay={10}>
-        <p
-          style={{
-            color: COLORS.textGray,
-            fontSize: 24,
-            textAlign: "center",
-          }}
-        >
-          {subtitle}
-        </p>
-      </FadeIn>
-      <FadeIn delay={20}>
-        <h1
-          style={{
-            color: COLORS.white,
-            fontSize: 48,
-            fontWeight: 700,
-            textAlign: "center",
-          }}
-        >
-          {title}
-        </h1>
-      </FadeIn>
+      {image && (
+        <>
+          <Img
+            src={staticFile(image)}
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: overlay,
+            }}
+          />
+        </>
+      )}
+      {/* Subtle hex-grid overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.06,
+          backgroundImage: `radial-gradient(${COLORS.cyan} 1px, transparent 1px)`,
+          backgroundSize: "28px 28px",
+        }}
+      />
+      <div style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+        {children}
+      </div>
     </AbsoluteFill>
   );
 }
 
-function HeadlineSlide({
-  title,
-  subtitle,
-}: {
-  title: string;
-  subtitle: string;
-}) {
+function Logo({ size = 60 }: { size?: number }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 14,
+      }}
+    >
+      <div
+        style={{
+          width: size,
+          height: size,
+          borderRadius: size * 0.2,
+          background: `linear-gradient(135deg, ${COLORS.cyan} 0%, ${COLORS.green} 100%)`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: `0 8px 32px ${COLORS.cyan}44`,
+        }}
+      >
+        <span style={{ color: COLORS.white, fontSize: size * 0.45, fontWeight: 800, fontFamily: "Inter, sans-serif" }}>
+          i10
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function BottomBar() {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 5,
+        background: `linear-gradient(90deg, ${COLORS.cyan} 0%, ${COLORS.green} 100%)`,
+      }}
+    />
+  );
+}
+
+/* ───── Slide 1: Intro ───── */
+function IntroSlide({ title, subtitle }: { title: string; subtitle: string }) {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const logoScale = spring({ frame, fps, config: { damping: 14, mass: 0.8 } });
+
+  return (
+    <SlideBackground image="images/img1_cover_classroom.jpg" overlay="rgba(6,24,64,0.88)">
+      <div style={{ transform: `scale(${logoScale})`, marginBottom: 32 }}>
+        <Logo size={100} />
+      </div>
+      <FadeIn delay={12}>
+        <p style={{ color: COLORS.textGray, fontSize: 28, textAlign: "center", fontFamily: "Inter, sans-serif", letterSpacing: 3, textTransform: "uppercase" }}>
+          {subtitle}
+        </p>
+      </FadeIn>
+      <FadeIn delay={22}>
+        <h1 style={{ color: COLORS.white, fontSize: 52, fontWeight: 800, textAlign: "center", fontFamily: "Inter, sans-serif", letterSpacing: -1 }}>
+          {title}
+        </h1>
+      </FadeIn>
+      <BottomBar />
+    </SlideBackground>
+  );
+}
+
+/* ───── Slide 2: Headline ───── */
+function HeadlineSlide({ title, subtitle }: { title: string; subtitle: string }) {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const lineWidth = spring({ frame, fps, config: { damping: 30 } });
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: COLORS.navy,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 80,
-      }}
-    >
+    <SlideBackground image="images/img4_technology.jpg" overlay="rgba(10,36,99,0.85)">
       <FadeIn>
-        <h1
-          style={{
-            color: COLORS.white,
-            fontSize: 56,
-            fontWeight: 700,
-            textAlign: "center",
-            lineHeight: 1.2,
-          }}
-        >
+        <h1 style={{ color: COLORS.white, fontSize: 64, fontWeight: 800, textAlign: "center", lineHeight: 1.15, fontFamily: "Inter, sans-serif", letterSpacing: -1, padding: "0 60px" }}>
           {title}
         </h1>
       </FadeIn>
       <div
         style={{
-          width: `${lineWidth * 200}px`,
-          height: 4,
-          backgroundColor: COLORS.cyan,
-          margin: "24px auto",
-          borderRadius: 2,
+          width: `${lineWidth * 240}px`,
+          height: 5,
+          background: `linear-gradient(90deg, ${COLORS.cyan}, ${COLORS.green})`,
+          margin: "28px auto",
+          borderRadius: 3,
         }}
       />
       <FadeIn delay={15}>
-        <p
-          style={{
-            color: COLORS.green,
-            fontSize: 36,
-            fontWeight: 600,
-            textAlign: "center",
-          }}
-        >
+        <p style={{ color: COLORS.green, fontSize: 42, fontWeight: 700, textAlign: "center", fontFamily: "Inter, sans-serif" }}>
           {subtitle}
         </p>
       </FadeIn>
-    </AbsoluteFill>
+      <BottomBar />
+    </SlideBackground>
   );
 }
 
+/* ───── Slide 3-5: Stat ───── */
 function StatSlide({
   value,
   label,
@@ -157,168 +203,89 @@ function StatSlide({
   const { fps } = useVideoConfig();
   const scale = spring({ frame, fps, config: { damping: 12 } });
 
+  const isAlert = value === "2.5%";
+  const accentColor = isAlert ? "#EF4444" : COLORS.cyan;
+
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: COLORS.navyDark,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 80,
-      }}
-    >
+    <SlideBackground>
       <div style={{ transform: `scale(${scale})`, textAlign: "center" }}>
-        <p
-          style={{
-            color: COLORS.cyan,
-            fontSize: 120,
-            fontWeight: 700,
-            lineHeight: 1,
-            marginBottom: 8,
-          }}
-        >
+        <p style={{ color: accentColor, fontSize: 140, fontWeight: 800, lineHeight: 1, marginBottom: 4, fontFamily: "Inter, sans-serif", textShadow: `0 0 60px ${accentColor}33` }}>
           {value}
         </p>
       </div>
       <FadeIn delay={10}>
-        <p
-          style={{
-            color: COLORS.white,
-            fontSize: 32,
-            fontWeight: 600,
-            textAlign: "center",
-            marginBottom: 16,
-          }}
-        >
+        <p style={{ color: COLORS.white, fontSize: 36, fontWeight: 700, textAlign: "center", marginBottom: 20, fontFamily: "Inter, sans-serif" }}>
           {label}
         </p>
       </FadeIn>
       <FadeIn delay={20}>
-        <p
-          style={{
-            color: COLORS.textGray,
-            fontSize: 22,
-            textAlign: "center",
-            whiteSpace: "pre-line",
-          }}
-        >
+        <p style={{ color: COLORS.textGray, fontSize: 24, textAlign: "center", whiteSpace: "pre-line", fontFamily: "Inter, sans-serif", lineHeight: 1.5 }}>
           {description}
         </p>
       </FadeIn>
-    </AbsoluteFill>
+      <BottomBar />
+    </SlideBackground>
   );
 }
 
-function PillarsSlide({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
-  const pillarColors = [COLORS.cyan, COLORS.cyan, COLORS.green];
+/* ───── Slide 6: Pillars ───── */
+function PillarsSlide({ title, items }: { title: string; items: string[] }) {
+  const pillarColors = [COLORS.cyan, "#EAB308", COLORS.green];
+  const pillarIcons = ["📋", "💰", "🚀"];
 
   return (
-    <AbsoluteFill
-      style={{
-        backgroundColor: COLORS.navy,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 80,
-      }}
-    >
+    <SlideBackground image="images/img1_cover_classroom.jpg" overlay="rgba(10,36,99,0.90)">
       <FadeIn>
-        <h2
-          style={{
-            color: COLORS.white,
-            fontSize: 40,
-            fontWeight: 700,
-            textAlign: "center",
-            marginBottom: 48,
-          }}
-        >
+        <h2 style={{ color: COLORS.white, fontSize: 44, fontWeight: 800, textAlign: "center", marginBottom: 56, fontFamily: "Inter, sans-serif" }}>
           {title}
         </h2>
       </FadeIn>
-      <div style={{ display: "flex", gap: 32 }}>
+      <div style={{ display: "flex", gap: 36, padding: "0 60px" }}>
         {items.map((item, i) => (
           <FadeIn key={item} delay={15 + i * 12}>
             <div
               style={{
-                backgroundColor: `${pillarColors[i]}22`,
+                backgroundColor: `${pillarColors[i]}18`,
                 border: `3px solid ${pillarColors[i]}`,
-                borderRadius: 16,
-                padding: "32px 48px",
+                borderRadius: 20,
+                padding: "36px 52px",
                 textAlign: "center",
+                minWidth: 220,
+                boxShadow: `0 8px 32px ${pillarColors[i]}22`,
               }}
             >
-              <p
-                style={{
-                  color: pillarColors[i],
-                  fontSize: 28,
-                  fontWeight: 700,
-                }}
-              >
+              <p style={{ fontSize: 40, marginBottom: 12 }}>{pillarIcons[i]}</p>
+              <p style={{ color: pillarColors[i], fontSize: 30, fontWeight: 800, fontFamily: "Inter, sans-serif", letterSpacing: 2 }}>
                 {item}
               </p>
             </div>
           </FadeIn>
         ))}
       </div>
-    </AbsoluteFill>
+      <BottomBar />
+    </SlideBackground>
   );
 }
 
-function CTASlide({
-  title,
-  subtitle,
-  cta,
-}: {
-  title: string;
-  subtitle: string;
-  cta: string;
-}) {
+/* ───── Slide 7: CTA ───── */
+function CTASlide({ title, subtitle, cta }: { title: string; subtitle: string; cta: string }) {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const pulse = interpolate(
-    frame % (fps * 2),
-    [0, fps, fps * 2],
-    [1, 1.05, 1],
-  );
+  const pulse = interpolate(frame % (fps * 2), [0, fps, fps * 2], [1, 1.06, 1]);
 
   return (
-    <AbsoluteFill
-      style={{
-        background: `linear-gradient(135deg, ${COLORS.navy} 0%, ${COLORS.navyDark} 100%)`,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 80,
-      }}
-    >
+    <SlideBackground image="images/img4_technology.jpg" overlay="rgba(6,24,64,0.90)">
       <FadeIn>
-        <p
-          style={{
-            color: COLORS.cyan,
-            fontSize: 22,
-            fontWeight: 600,
-            textAlign: "center",
-            letterSpacing: 4,
-            textTransform: "uppercase",
-            marginBottom: 16,
-          }}
-        >
+        <Logo size={56} />
+      </FadeIn>
+      <div style={{ height: 28 }} />
+      <FadeIn delay={5}>
+        <p style={{ color: COLORS.cyan, fontSize: 24, fontWeight: 600, textAlign: "center", letterSpacing: 5, textTransform: "uppercase", marginBottom: 16, fontFamily: "Inter, sans-serif" }}>
           {title}
         </p>
       </FadeIn>
-      <FadeIn delay={10}>
-        <h2
-          style={{
-            color: COLORS.white,
-            fontSize: 48,
-            fontWeight: 700,
-            textAlign: "center",
-            marginBottom: 40,
-          }}
-        >
+      <FadeIn delay={12}>
+        <h2 style={{ color: COLORS.white, fontSize: 52, fontWeight: 800, textAlign: "center", marginBottom: 44, fontFamily: "Inter, sans-serif", letterSpacing: -1 }}>
           {subtitle}
         </h2>
       </FadeIn>
@@ -326,27 +293,23 @@ function CTASlide({
         <div
           style={{
             transform: `scale(${pulse})`,
-            backgroundColor: COLORS.green,
-            padding: "20px 48px",
-            borderRadius: 12,
+            background: `linear-gradient(135deg, ${COLORS.green} 0%, #00C48A 100%)`,
+            padding: "22px 56px",
+            borderRadius: 14,
+            boxShadow: `0 8px 40px ${COLORS.green}44`,
           }}
         >
-          <p
-            style={{
-              color: COLORS.navyDark,
-              fontSize: 24,
-              fontWeight: 700,
-              textAlign: "center",
-            }}
-          >
+          <p style={{ color: COLORS.navyDark, fontSize: 26, fontWeight: 800, textAlign: "center", fontFamily: "Inter, sans-serif" }}>
             {cta}
           </p>
         </div>
       </FadeIn>
-    </AbsoluteFill>
+      <BottomBar />
+    </SlideBackground>
   );
 }
 
+/* ───── Main composition ───── */
 export const Teaser: React.FC = () => {
   const slideDuration = 4 * 30; // 4 seconds at 30fps = 120 frames
 

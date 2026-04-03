@@ -1,6 +1,5 @@
 import { HERO } from "@/lib/constants";
 import SubscribeForm from "./SubscribeForm";
-import TeaserPlayer from "./TeaserPlayer";
 
 export default function Hero() {
   return (
@@ -18,7 +17,7 @@ export default function Hero() {
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Text + Video */}
+          {/* Text */}
           <div className="text-center lg:text-left lg:pt-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan/20 text-cyan text-xs font-semibold mb-6">
               <span className="w-2 h-2 rounded-full bg-green animate-pulse" />
@@ -33,10 +32,12 @@ export default function Hero() {
               {HERO.subheadline}
             </p>
 
-            {/* Teaser Video */}
-            <div className="w-full max-w-lg mx-auto lg:mx-0 mb-8 lg:mb-0">
-              <TeaserPlayer />
-            </div>
+            <a
+              href="#inscricao-form"
+              className="lg:hidden inline-flex items-center justify-center px-8 py-4 rounded-lg bg-green text-navy-dark font-bold text-base hover:brightness-110 transition-all"
+            >
+              {HERO.cta}
+            </a>
           </div>
 
           {/* Form */}

@@ -215,7 +215,7 @@ function PillarsSlide({
   title: string;
   items: string[];
 }) {
-  const pillarColors = [COLORS.cyan, "#EAB308", COLORS.green];
+  const pillarColors = [COLORS.cyan, COLORS.cyan, COLORS.green];
 
   return (
     <AbsoluteFill

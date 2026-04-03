@@ -53,7 +53,7 @@ export const SLIDES = [
   {
     type: "cta" as const,
     title: "Webinar Gratuito",
-    subtitle: "15 de Abril, 2026 — 19h",
+    subtitle: "15 de Abril, 2026 — 17h",
     cta: "Inscreva-se Agora",
   },
 ];

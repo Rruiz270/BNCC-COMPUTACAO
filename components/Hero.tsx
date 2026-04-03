@@ -1,18 +1,19 @@
 import { HERO } from "@/lib/constants";
 import SubscribeForm from "./SubscribeForm";
-import TeaserPlayer from "./TeaserPlayer";
 
 export default function Hero() {
   return (
     <section
       id="inscricao"
-      className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-dark to-navy"
+      className="relative overflow-hidden"
     >
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-green rounded-full blur-3xl" />
-      </div>
+      {/* Photo background with navy overlay + hex pattern */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/img1_cover_classroom.jpg')" }}
+      />
+      <div className="absolute inset-0 bg-navy/70" />
+      <div className="absolute inset-0 hex-pattern opacity-30" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -23,18 +24,20 @@ export default function Hero() {
               WEBINAR GRATUITO — 15 DE ABRIL
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6 font-serif">
               {HERO.headline}
             </h1>
 
-            <p className="text-lg text-text-light mb-8 max-w-xl mx-auto lg:mx-0">
+            <p className="text-lg text-white/70 mb-8 max-w-xl mx-auto lg:mx-0">
               {HERO.subheadline}
             </p>
 
-            {/* Teaser Video */}
-            <div className="w-full max-w-lg mx-auto lg:mx-0">
-              <TeaserPlayer />
-            </div>
+            <a
+              href="#inscricao-form"
+              className="lg:hidden inline-flex items-center justify-center px-8 py-4 rounded-lg bg-green text-navy-dark font-bold text-base hover:brightness-110 transition-all"
+            >
+              {HERO.cta}
+            </a>
           </div>
 
           {/* Form */}

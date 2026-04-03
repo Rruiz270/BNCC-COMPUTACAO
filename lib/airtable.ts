@@ -19,6 +19,6 @@ export async function submitSubscription(
     return { success: true };
   } catch (err) {
     console.error("Database error:", err);
-    return { success: false, error: "Erro ao registrar inscricao. Tente novamente." };
+    return { success: false, error: "Erro ao registrar inscrição. Tente novamente." };
   }
 }

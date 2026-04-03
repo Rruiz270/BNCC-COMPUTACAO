@@ -63,7 +63,7 @@ export default function SubscribeForm() {
 
       setSuccess(true);
     } catch {
-      setErrorMsg("Erro de conexao. Tente novamente.");
+      setErrorMsg("Erro de conexão. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -88,7 +88,7 @@ export default function SubscribeForm() {
           </svg>
         </div>
         <h3 className="text-xl font-bold text-text-dark mb-2">
-          Inscricao confirmada!
+          Inscrição confirmada!
         </h3>
         <p className="text-text-gray">
           Obrigado, <span className="font-semibold">{nome}</span>! Confira seu
@@ -192,7 +192,7 @@ export default function SubscribeForm() {
             htmlFor="municipio"
             className="block text-sm font-medium text-text-dark mb-1"
           >
-            Municipio
+            Município
           </label>
           <input
             id="municipio"
@@ -235,7 +235,7 @@ export default function SubscribeForm() {
             className="mt-0.5 w-4 h-4 rounded border-border text-cyan focus:ring-cyan"
           />
           <span className="text-xs text-text-gray">
-            Aceito receber atualizacoes sobre o webinar e conteudos do Instituto
+            Aceito receber atualizações sobre o webinar e conteúdos do Instituto
             i10.
           </span>
         </label>

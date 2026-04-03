@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,10 +8,16 @@ const inter = Inter({
   display: "swap",
 });
 
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-source-serif",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "BNCC Computacao 2026 - Webinar Gratuito | Instituto i10",
+  title: "BNCC Computação 2026 - Webinar Gratuito | Instituto i10",
   description:
-    "Webinar gratuito sobre implementacao da BNCC Computacao 2026. Aprenda as regras, acesse recursos do FUNDEB e aplique na sua rede municipal.",
+    "Webinar gratuito sobre implementação da BNCC Computação 2026. Aprenda as regras, acesse recursos do FUNDEB e aplique na sua rede municipal.",
 };
 
 export default function RootLayout({
@@ -20,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} h-full antialiased`}>
+    <html lang="pt-BR" className={`${inter.variable} ${sourceSerif.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

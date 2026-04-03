@@ -11,10 +11,10 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="bg-bg-gray">
+    <section id="faq" className="bg-navy">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 font-serif">
             Perguntas Frequentes
           </h2>
         </div>
@@ -23,18 +23,18 @@ export default function FAQ() {
           {FAQ_ITEMS.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl border border-border overflow-hidden"
+              className="bg-navy-dark/60 rounded-xl border border-cyan/10 overflow-hidden"
             >
               <button
                 onClick={() => toggle(index)}
-                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-bg-gray/50 transition-colors"
+                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-white/5 transition-colors"
                 aria-expanded={openIndex === index}
               >
-                <span className="text-base font-semibold text-text-dark pr-4">
+                <span className="text-base font-semibold text-white pr-4">
                   {item.question}
                 </span>
                 <svg
-                  className={`w-5 h-5 shrink-0 text-text-gray transition-transform duration-200 ${
+                  className={`w-5 h-5 shrink-0 text-cyan transition-transform duration-200 ${
                     openIndex === index ? "rotate-180" : ""
                   }`}
                   fill="none"
@@ -52,7 +52,7 @@ export default function FAQ() {
 
               {openIndex === index && (
                 <div className="px-6 pb-4">
-                  <p className="text-sm text-text-gray leading-relaxed">
+                  <p className="text-sm text-white/50 leading-relaxed">
                     {item.answer}
                   </p>
                 </div>

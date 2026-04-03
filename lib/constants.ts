@@ -1,9 +1,9 @@
 export const SITE = {
   name: "Instituto i10",
   webinarDate: "15 de Abril, 2026",
-  webinarTime: "19:00",
+  webinarTime: "17:00",
   webinarDuration: "2 horas",
-  format: "Zoom interativo",
+  format: "Google Meet (ao vivo)",
   certificate: "Sim, com certificado de participação",
   material: "Acesso por 30 dias após o webinar",
 };

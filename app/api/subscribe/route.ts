@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { subscriptionSchema } from "@/lib/validation";
 import { submitSubscription } from "@/lib/airtable";
+import { sendConfirmationEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -23,6 +24,11 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
+
+    // Send confirmation email (non-blocking — don't fail the subscription if email fails)
+    sendConfirmationEmail(parsed.data.email, parsed.data.nome).catch((err) => {
+      console.error("Background email error:", err);
+    });
 
     return NextResponse.json({ success: true });
   } catch {

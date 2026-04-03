@@ -10,7 +10,7 @@ export const SITE = {
 
 export const FACILITATORS = [
   {
-    name: "Emerson Pontos",
+    name: "Emerson Pontes",
     initials: "EP",
     title: "Jurídico — Especialista em Terceiro Setor",
     bio: "Especialista em direito do terceiro setor, Emerson atua na interseção entre legislação educacional e políticas públicas. Auxilia redes municipais a navegarem os requisitos legais da BNCC Computação e a estruturarem projetos em conformidade com o FUNDEB.",

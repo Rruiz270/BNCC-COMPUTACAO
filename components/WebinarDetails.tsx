@@ -5,7 +5,7 @@ export default function WebinarDetails() {
     { icon: "calendar", label: "Data", value: SITE.webinarDate },
     { icon: "clock", label: "Horário", value: SITE.webinarTime },
     { icon: "timer", label: "Duração", value: SITE.webinarDuration },
-    { icon: "users", label: "Facilitadores", value: "Emerson Pontos & Bruno Almeida" },
+    { icon: "users", label: "Facilitadores", value: "Emerson Pontes & Bruno Almeida" },
     { icon: "laptop", label: "Formato", value: SITE.format },
     { icon: "certificate", label: "Certificado", value: SITE.certificate },
     { icon: "package", label: "Material", value: SITE.material },

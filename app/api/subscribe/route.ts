@@ -25,10 +25,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send confirmation email (non-blocking — don't fail the subscription if email fails)
-    sendConfirmationEmail(parsed.data.email, parsed.data.nome).catch((err) => {
-      console.error("Background email error:", err);
-    });
+    // Send confirmation email (await so serverless function doesn't terminate early)
+    const emailResult = await sendConfirmationEmail(parsed.data.email, parsed.data.nome);
+    if (!emailResult.success) {
+      console.error("Email send failed:", emailResult.error);
+    }
 
     return NextResponse.json({ success: true });
   } catch {

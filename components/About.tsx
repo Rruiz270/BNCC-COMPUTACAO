@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { FACILITATORS } from "@/lib/constants";
 
 export default function About() {
@@ -18,18 +17,16 @@ export default function About() {
               className="flex flex-col items-center text-center bg-navy/60 rounded-2xl p-8 border border-cyan/20"
             >
               {f.image ? (
-                <div className="w-20 h-20 rounded-full ring-4 ring-cyan/40 shadow-[0_0_20px_rgba(0,180,216,0.3)] mb-4 overflow-hidden">
-                  <Image
+                <div className="w-28 h-28 rounded-full ring-4 ring-cyan/40 shadow-[0_0_20px_rgba(0,180,216,0.3)] mb-4 overflow-hidden">
+                  <img
                     src={f.image}
                     alt={f.name}
-                    width={80}
-                    height={80}
                     className="w-full h-full object-cover"
                   />
                 </div>
               ) : (
-                <div className="w-20 h-20 rounded-full bg-navy flex items-center justify-center ring-4 ring-cyan/40 shadow-[0_0_20px_rgba(0,180,216,0.3)] mb-4">
-                  <span className="text-white text-xl font-bold">{f.initials}</span>
+                <div className="w-28 h-28 rounded-full bg-navy flex items-center justify-center ring-4 ring-cyan/40 shadow-[0_0_20px_rgba(0,180,216,0.3)] mb-4">
+                  <span className="text-white text-2xl font-bold">{f.initials}</span>
                 </div>
               )}
 

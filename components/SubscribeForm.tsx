@@ -16,6 +16,7 @@ export default function SubscribeForm() {
   const [municipio, setMunicipio] = useState("");
   const [cargo, setCargo] = useState("");
   const [aceita, setAceita] = useState(false);
+  const [showOptional, setShowOptional] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -162,83 +163,96 @@ export default function SubscribeForm() {
         )}
       </div>
 
-      {/* Telefone */}
-      <div className="mb-4">
-        <label
-          htmlFor="telefone"
-          className="block text-sm font-medium text-text-dark mb-1"
+      {/* Optional fields - collapsed on mobile by default */}
+      {!showOptional && (
+        <button
+          type="button"
+          onClick={() => setShowOptional(true)}
+          className="mb-4 text-sm text-cyan hover:text-cyan/80 transition-colors lg:hidden"
         >
-          Telefone
-        </label>
-        <input
-          id="telefone"
-          type="tel"
-          value={telefone}
-          onChange={(e) => setTelefone(formatPhone(e.target.value))}
-          placeholder="(11) 99999-9999"
-          className="w-full px-4 py-3 rounded-lg border border-border text-sm text-text-dark placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-cyan focus:border-transparent transition-all"
-        />
-        {fieldErrors.telefone && (
-          <p className="mt-1 text-xs text-red-600">
-            {fieldErrors.telefone[0]}
-          </p>
-        )}
-      </div>
+          + Adicionar telefone, município e cargo (opcional)
+        </button>
+      )}
 
-      {/* Municipio + Cargo row */}
-      <div className="grid sm:grid-cols-2 gap-4 mb-4">
-        <div>
+      <div className={`${showOptional ? "block" : "hidden"} lg:block`}>
+        {/* Telefone */}
+        <div className="mb-4">
           <label
-            htmlFor="municipio"
+            htmlFor="telefone"
             className="block text-sm font-medium text-text-dark mb-1"
           >
-            Município
+            Telefone
           </label>
           <input
-            id="municipio"
-            type="text"
-            value={municipio}
-            onChange={(e) => setMunicipio(e.target.value)}
-            placeholder="Sua cidade"
+            id="telefone"
+            type="tel"
+            value={telefone}
+            onChange={(e) => setTelefone(formatPhone(e.target.value))}
+            placeholder="(11) 99999-9999"
             className="w-full px-4 py-3 rounded-lg border border-border text-sm text-text-dark placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-cyan focus:border-transparent transition-all"
           />
+          {fieldErrors.telefone && (
+            <p className="mt-1 text-xs text-red-600">
+              {fieldErrors.telefone[0]}
+            </p>
+          )}
         </div>
-        <div>
-          <label
-            htmlFor="cargo"
-            className="block text-sm font-medium text-text-dark mb-1"
-          >
-            Cargo
-          </label>
-          <select
-            id="cargo"
-            value={cargo}
-            onChange={(e) => setCargo(e.target.value)}
-            className="w-full px-4 py-3 rounded-lg border border-border text-sm text-text-dark focus:outline-none focus:ring-2 focus:ring-cyan focus:border-transparent transition-all bg-white"
-          >
-            {CARGO_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
 
-      {/* Checkbox */}
-      <div className="mb-6">
-        <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={aceita}
-            onChange={(e) => setAceita(e.target.checked)}
-            className="mt-0.5 w-4 h-4 rounded border-border text-cyan focus:ring-cyan"
-          />
-          <span className="text-xs text-text-gray">
-            Aceito receber atualizações sobre o webinar e conteúdos do Instituto
-            i10.
-          </span>
-        </label>
+        {/* Municipio + Cargo row */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label
+              htmlFor="municipio"
+              className="block text-sm font-medium text-text-dark mb-1"
+            >
+              Município
+            </label>
+            <input
+              id="municipio"
+              type="text"
+              value={municipio}
+              onChange={(e) => setMunicipio(e.target.value)}
+              placeholder="Sua cidade"
+              className="w-full px-4 py-3 rounded-lg border border-border text-sm text-text-dark placeholder:text-text-light focus:outline-none focus:ring-2 focus:ring-cyan focus:border-transparent transition-all"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="cargo"
+              className="block text-sm font-medium text-text-dark mb-1"
+            >
+              Cargo
+            </label>
+            <select
+              id="cargo"
+              value={cargo}
+              onChange={(e) => setCargo(e.target.value)}
+              className="w-full px-4 py-3 rounded-lg border border-border text-sm text-text-dark focus:outline-none focus:ring-2 focus:ring-cyan focus:border-transparent transition-all bg-white"
+            >
+              {CARGO_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Checkbox */}
+        <div className="mb-4">
+          <label className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={aceita}
+              onChange={(e) => setAceita(e.target.checked)}
+              className="mt-0.5 w-4 h-4 rounded border-border text-cyan focus:ring-cyan"
+            />
+            <span className="text-xs text-text-gray">
+              Aceito receber atualizações sobre o webinar e conteúdos do Instituto
+              i10.
+            </span>
+          </label>
+        </div>
       </div>
 
       {/* Submit */}

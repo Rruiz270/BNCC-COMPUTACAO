@@ -17,8 +17,8 @@ export default function Hero() {
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Text */}
-          <div className="text-center lg:text-left lg:pt-8">
+          {/* Text - shows after form on mobile, before on desktop */}
+          <div className="text-center lg:text-left lg:pt-8 order-2 lg:order-1">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan/20 text-cyan text-xs font-semibold mb-6">
               <span className="w-2 h-2 rounded-full bg-green animate-pulse" />
               WEBINAR GRATUITO — 15 DE ABRIL
@@ -31,17 +31,10 @@ export default function Hero() {
             <p className="text-lg text-white/70 mb-8 max-w-xl mx-auto lg:mx-0">
               {HERO.subheadline}
             </p>
-
-            <a
-              href="#inscricao-form"
-              className="lg:hidden inline-flex items-center justify-center px-8 py-4 rounded-lg bg-green text-navy-dark font-bold text-base hover:brightness-110 transition-all"
-            >
-              {HERO.cta}
-            </a>
           </div>
 
-          {/* Form */}
-          <div className="w-full max-w-md mx-auto lg:mx-0">
+          {/* Form - shows FIRST on mobile */}
+          <div className="w-full max-w-md mx-auto lg:mx-0 order-1 lg:order-2">
             <SubscribeForm />
           </div>
         </div>

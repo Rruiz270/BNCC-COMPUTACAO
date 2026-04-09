@@ -2,8 +2,9 @@ import { prisma } from "./db";
 import { createTransporter, wrapEmailLayout } from "./email";
 import type { Reminder } from "./email-reminders";
 
-const BATCH_SIZE = 20;
-const BATCH_DELAY_MS = 2000;
+const BATCH_SIZE = 5;
+const BATCH_DELAY_MS = 5000;
+const PER_EMAIL_DELAY_MS = 1000;
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -69,24 +70,20 @@ export async function sendReminderToAll(
   for (let i = 0; i < uniqueSubscribers.length; i += BATCH_SIZE) {
     const batch = uniqueSubscribers.slice(i, i + BATCH_SIZE);
 
-    const results = await Promise.allSettled(
-      batch.map(async ({ email }) => {
+    for (const { email } of batch) {
+      try {
         await transporter.sendMail({
           from: `Instituto i10 <${user}>`,
           to: email,
           subject: reminder.subject,
           html: wrapEmailLayout(reminder.bodyHtml),
         });
-      })
-    );
-
-    for (const result of results) {
-      if (result.status === "fulfilled") {
         totalSent++;
-      } else {
+      } catch (err) {
         totalFailed++;
-        console.error("Failed to send:", result.reason);
+        console.error("Failed to send:", err);
       }
+      await sleep(PER_EMAIL_DELAY_MS);
     }
 
     // Delay between batches (skip after last batch)

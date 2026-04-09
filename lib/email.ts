@@ -1,29 +1,25 @@
 import nodemailer from "nodemailer";
 
-const MEET_LINK = "https://meet.google.com/bft-fgvm-pra";
-const MEET_PHONE = "+55 11 4935-1293";
-const MEET_PIN = "655 173 381#";
+export const MEET_LINK = "https://meet.google.com/bft-fgvm-pra";
+export const MEET_PHONE = "+55 11 4935-1293";
+export const MEET_PIN = "655 173 381#";
 
-export async function sendConfirmationEmail(to: string, nome: string) {
+export function createTransporter() {
   const user = process.env.GMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD;
 
   if (!user || !pass) {
-    console.warn("GMAIL_USER or GMAIL_APP_PASSWORD not set — skipping email");
-    return { success: false, error: "Email service not configured" };
+    return null;
   }
 
-  const transporter = nodemailer.createTransport({
+  return nodemailer.createTransport({
     service: "gmail",
     auth: { user, pass },
   });
+}
 
-  try {
-    await transporter.sendMail({
-      from: `Instituto i10 <${user}>`,
-      to,
-      subject: "Inscrição Confirmada — BNCC Computação 2026 | Instituto i10",
-      html: `
+export function wrapEmailLayout(bodyHtml: string): string {
+  return `
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head><meta charset="UTF-8"></head>
@@ -38,6 +34,34 @@ export async function sendConfirmationEmail(to: string, nome: string) {
 
     <!-- Body -->
     <div style="background:#ffffff;padding:32px 24px;border-left:1px solid #e2e8f0;border-right:1px solid #e2e8f0;">
+      ${bodyHtml}
+    </div>
+
+    <!-- Footer -->
+    <div style="background:#061840;border-radius:0 0 16px 16px;padding:20px 24px;text-align:center;">
+      <p style="color:rgba(255,255,255,0.4);font-size:11px;margin:0 0 4px;font-style:italic;">
+        Orquestrando o Futuro da Educação Pública
+      </p>
+      <p style="color:rgba(255,255,255,0.3);font-size:11px;margin:0;">
+        © 2026 Instituto i10. Todos os direitos reservados.
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>`.trim();
+}
+
+export async function sendConfirmationEmail(to: string, nome: string) {
+  const transporter = createTransporter();
+  const user = process.env.GMAIL_USER;
+
+  if (!transporter || !user) {
+    console.warn("GMAIL_USER or GMAIL_APP_PASSWORD not set — skipping email");
+    return { success: false, error: "Email service not configured" };
+  }
+
+  const bodyHtml = `
       <h2 style="color:#0A2463;font-size:22px;margin:0 0 8px;">Inscrição confirmada!</h2>
       <p style="color:#475569;font-size:15px;line-height:1.6;margin:0 0 24px;">
         Olá, <strong>${nome}</strong>! Sua vaga no webinar <strong>BNCC Computação 2026</strong> está garantida.
@@ -111,23 +135,14 @@ export async function sendConfirmationEmail(to: string, nome: string) {
 
       <p style="color:#94a3b8;font-size:13px;line-height:1.5;margin:0;">
         Guarde este e-mail — o link do Google Meet é o mesmo para o dia do evento. Recomendamos entrar 5 minutos antes do início.
-      </p>
-    </div>
+      </p>`;
 
-    <!-- Footer -->
-    <div style="background:#061840;border-radius:0 0 16px 16px;padding:20px 24px;text-align:center;">
-      <p style="color:rgba(255,255,255,0.4);font-size:11px;margin:0 0 4px;font-style:italic;">
-        Orquestrando o Futuro da Educação Pública
-      </p>
-      <p style="color:rgba(255,255,255,0.3);font-size:11px;margin:0;">
-        © 2026 Instituto i10. Todos os direitos reservados.
-      </p>
-    </div>
-
-  </div>
-</body>
-</html>
-      `.trim(),
+  try {
+    await transporter.sendMail({
+      from: `Instituto i10 <${user}>`,
+      to,
+      subject: "Inscrição Confirmada — BNCC Computação 2026 | Instituto i10",
+      html: wrapEmailLayout(bodyHtml),
     });
 
     return { success: true };

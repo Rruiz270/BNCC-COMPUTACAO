@@ -19,3 +19,14 @@ model Inscricao {
 
   @@map("inscricoes")
 }
+
+model EmailLembrete {
+  id          Int      @id @default(autoincrement())
+  reminderId  String   @unique @map("reminder_id")
+  sentAt      DateTime @default(now()) @map("sent_at")
+  totalSent   Int      @default(0) @map("total_sent")
+  totalFailed Int      @default(0) @map("total_failed")
+  status      String   @default("completed")
+
+  @@map("email_lembretes")
+}

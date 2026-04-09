@@ -121,11 +121,11 @@ export const REMINDERS: Reminder[] = [
       </p>`,
   },
 
-  // #3 — Sex 11/Abr 10:00 BRT
+  // #3 — Sex 10/Abr 10:00 BRT
   {
     id: "week1_friday",
     subject: "Semana do webinar BNCC Computação! Você está pronto? | Instituto i10",
-    date: "2026-04-11",
+    date: "2026-04-10",
     time: "10:00",
     bodyHtml: `
       <h2 style="color:#0A2463;font-size:22px;margin:0 0 8px;">A semana do webinar chegou!</h2>

@@ -4,6 +4,17 @@ export const MEET_LINK = "https://meet.google.com/bft-fgvm-pra";
 export const MEET_PHONE = "+55 11 4935-1293";
 export const MEET_PIN = "655 173 381#";
 
+// Google Calendar "add event" link — 15/Abr/2026 17:00-19:00 BRT (20:00-22:00 UTC)
+export const CALENDAR_LINK =
+  "https://calendar.google.com/calendar/render?" +
+  new URLSearchParams({
+    action: "TEMPLATE",
+    text: "Webinar BNCC Computação 2026 — Instituto i10",
+    dates: "20260415T200000Z/20260415T220000Z",
+    details: `Webinar gratuito sobre implementação da BNCC Computação.\n\nLink do Google Meet: ${MEET_LINK}\n\nAcesso por telefone: +55 11 4935-1293 — PIN: 655 173 381#`,
+    location: `Google Meet — ${MEET_LINK}`,
+  }).toString();
+
 export function createTransporter() {
   const user = process.env.GMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD;

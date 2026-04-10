@@ -1,4 +1,4 @@
-import { MEET_LINK, MEET_PHONE, MEET_PIN } from "./email";
+import { CALENDAR_LINK, MEET_LINK, MEET_PHONE, MEET_PIN } from "./email";
 
 export interface Reminder {
   id: string;
@@ -90,7 +90,7 @@ export const REMINDERS: Reminder[] = [
       <p style="color:#475569;font-size:15px;line-height:1.6;margin:0 0 16px;">
         <strong>70% das redes municipais ainda não se adequaram.</strong> Não deixe a sua ficar para trás.
       </p>
-      ${greenButton("Adicionar à Agenda", MEET_LINK)}
+      ${greenButton("Adicionar à Agenda", CALENDAR_LINK)}
       <p style="color:#94a3b8;font-size:13px;line-height:1.5;margin:0;">
         Guarde este e-mail — enviaremos mais detalhes ao longo da semana.
       </p>`,
@@ -141,7 +141,7 @@ export const REMINDERS: Reminder[] = [
         <strong>Dica:</strong> Convide colegas da secretaria e da coordenação — quanto mais pessoas da sua rede participarem, mais fácil será a implementação.
       </p>
       ${eventCard}
-      ${greenButton("Salvar na Agenda", MEET_LINK)}
+      ${greenButton("Salvar na Agenda", CALENDAR_LINK)}
       <p style="color:#94a3b8;font-size:13px;line-height:1.5;margin:0;">
         Enviaremos mais um lembrete na segunda e terça.
       </p>`,

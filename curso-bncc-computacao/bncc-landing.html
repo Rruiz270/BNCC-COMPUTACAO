@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso BNCC Computação — Instituto i10 | Gratuito para Gestores e Educadores</title>
+<meta name="description" content="Curso 100% gratuito de BNCC Computação para secretários de educação, gestores e educadores da rede pública. Regras, aplicação prática e captação de recursos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0A2463;
+  --navy-dark: #061840;
+  --navy-light: #0E2D6E;
+  --cyan: #00B4D8;
+  --cyan-light: #48CAE4;
+  --green: #00E5A0;
+  --green-dark: #00C48A;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-400: #94a3b8;
+  --gray-600: #475569;
+  --gray-800: #1e293b;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--gray-800);
+  background: var(--white);
+  line-height: 1.6;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(170deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300B4D8' fill-opacity='1'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-glow-1 {
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,180,216,0.12) 0%, transparent 70%);
+}
+.hero-glow-2 {
+  position: absolute;
+  bottom: -150px; left: -150px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,229,160,0.08) 0%, transparent 70%);
+}
+
+.hero-gradient-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,180,216,0.12);
+  border: 1px solid rgba(0,180,216,0.25);
+  border-radius: 24px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cyan-light);
+  letter-spacing: 0.3px;
+  margin-bottom: 24px;
+}
+.hero-badge-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.hero-title {
+  margin-bottom: 16px;
+}
+.hero-title .bncc {
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-title .comp {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  display: block;
+  margin-top: 4px;
+}
+
+.hero-sub {
+  font-family: 'Source Serif 4', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+.hero-sub strong {
+  color: var(--green);
+  font-style: normal;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 36px;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-number {
+  font-size: 36px;
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  color: var(--navy-dark);
+  font-size: 16px;
+  font-weight: 800;
+  padding: 16px 36px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0,180,216,0.3);
+}
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,180,216,0.4);
+}
+
+/* ===== HERO RIGHT: FORM CARD ===== */
+.form-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 40px 32px;
+  backdrop-filter: blur(20px);
+}
+.form-card-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.form-card-title .accent { color: var(--green); }
+.form-card-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 28px;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+.form-group input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--cyan);
+  background: rgba(0,180,216,0.08);
+}
+.form-group select option {
+  background: var(--navy);
+  color: white;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.form-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  color: var(--navy-dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.form-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,180,216,0.3);
+}
+.form-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ===== PILLARS SECTION ===== */
+.pillars-section {
+  padding: 100px 32px;
+  background: var(--gray-50);
+}
+.pillars-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-overline {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.section-subtitle {
+  font-size: 16px;
+  color: var(--gray-600);
+  max-width: 600px;
+  margin-bottom: 56px;
+  line-height: 1.6;
+}
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.pillar-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 36px 28px;
+  border: 1px solid var(--gray-200);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.pillar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(10,36,99,0.08);
+}
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.pillar-card:nth-child(1)::before { background: var(--cyan); }
+.pillar-card:nth-child(2)::before { background: var(--cyan-light); }
+.pillar-card:nth-child(3)::before { background: var(--green); }
+
+.pillar-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.pillar-card:nth-child(1) .pillar-icon { background: rgba(0,180,216,0.1); color: var(--cyan); }
+.pillar-card:nth-child(2) .pillar-icon { background: rgba(72,202,228,0.1); color: var(--cyan-light); }
+.pillar-card:nth-child(3) .pillar-icon { background: rgba(0,229,160,0.1); color: var(--green); }
+
+.pillar-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.pillar-desc {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.pillar-topics {
+  list-style: none;
+}
+.pillar-topics li {
+  font-size: 13px;
+  color: var(--gray-600);
+  padding: 6px 0;
+  border-top: 1px solid var(--gray-100);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pillar-topics li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pillar-card:nth-child(1) .pillar-topics li::before { background: var(--cyan); }
+.pillar-card:nth-child(2) .pillar-topics li::before { background: var(--cyan-light); }
+.pillar-card:nth-child(3) .pillar-topics li::before { background: var(--green); }
+
+/* ===== URGENCY BAR ===== */
+.urgency-bar {
+  background: var(--navy);
+  color: var(--white);
+  padding: 48px 32px;
+  text-align: center;
+}
+.urgency-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.urgency-numbers {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  margin-bottom: 28px;
+}
+.urgency-item {
+  text-align: center;
+}
+.urgency-num {
+  font-size: 48px;
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.urgency-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+  font-weight: 500;
+}
+.urgency-text {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  max-width: 650px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+.urgency-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  color: var(--navy-dark);
+  font-size: 15px;
+  font-weight: 800;
+  padding: 14px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+.urgency-cta:hover { transform: translateY(-2px); }
+
+/* ===== ABOUT i10 ===== */
+.about-section {
+  padding: 100px 32px;
+  background: var(--white);
+}
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.about-text-block p {
+  font-size: 15px;
+  color: var(--gray-600);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.about-text-block p strong {
+  color: var(--navy);
+}
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.about-feature {
+  padding: 20px;
+  background: var(--gray-50);
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+.about-feature-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.about-feature-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.about-feature-desc {
+  font-size: 12px;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--navy-dark);
+  color: var(--white);
+  padding: 48px 32px;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-logo {
+  font-size: 24px;
+  font-weight: 800;
+}
+.footer-logo .i { color: white; }
+.footer-logo .t { color: var(--green); }
+.footer-inst {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+.footer-right {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.8;
+}
+.footer-gradient {
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 60px 24px;
+  }
+  .hero-title .bncc { font-size: 48px; }
+  .hero-title .comp { font-size: 36px; }
+  .hero-stats { gap: 20px; }
+  .hero-stat-number { font-size: 28px; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .about-inner { grid-template-columns: 1fr; gap: 40px; }
+  .about-features { grid-template-columns: 1fr; }
+  .urgency-numbers { gap: 32px; flex-wrap: wrap; }
+  .urgency-num { font-size: 36px; }
+  .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+  .footer-right { text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+  .section-title { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-gradient-top"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Vagas Abertas &mdash; 100% Gratuito
+      </div>
+
+      <div class="hero-title">
+        <div class="bncc">BNCC</div>
+        <span class="comp">Computa&ccedil;&atilde;o</span>
+      </div>
+
+      <p class="hero-sub">
+        Curso <strong>100% gratuito</strong> para secret&aacute;rios de educa&ccedil;&atilde;o, gestores e educadores da rede p&uacute;blica. Entenda as regras, saiba como aplicar e descubra onde captar recursos.
+      </p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-number">4h</div>
+          <div class="hero-stat-label">de curso</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">62</div>
+          <div class="hero-stat-label">slides</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">4</div>
+          <div class="hero-stat-label">ferramentas pr&aacute;ticas</div>
+        </div>
+      </div>
+
+      <a href="#inscreva-se" class="hero-cta">
+        Inscreva-se Gratuitamente &rarr;
+      </a>
+    </div>
+
+    <!-- Form -->
+    <div class="form-card" id="inscreva-se">
+      <div class="form-card-title">Inscreva-se <span class="accent">agora</span></div>
+      <div class="form-card-sub">Preencha seus dados para acessar o curso completo.</div>
+
+      <form id="bncc-form" action="#" method="POST">
+        <div class="form-group">
+          <label>Nome completo</label>
+          <input type="text" name="nome" placeholder="Seu nome" required>
+        </div>
+        <div class="form-group">
+          <label>E-mail profissional</label>
+          <input type="email" name="email" placeholder="email@prefeitura.gov.br" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Munic&iacute;pio</label>
+            <input type="text" name="municipio" placeholder="Ex: S&atilde;o Paulo" required>
+          </div>
+          <div class="form-group">
+            <label>Estado</label>
+            <select name="estado" required>
+              <option value="">Selecione</option>
+              <option value="AC">AC</option><option value="AL">AL</option>
+              <option value="AP">AP</option><option value="AM">AM</option>
+              <option value="BA">BA</option><option value="CE">CE</option>
+              <option value="DF">DF</option><option value="ES">ES</option>
+              <option value="GO">GO</option><option value="MA">MA</option>
+              <option value="MT">MT</option><option value="MS">MS</option>
+              <option value="MG">MG</option><option value="PA">PA</option>
+              <option value="PB">PB</option><option value="PR">PR</option>
+              <option value="PE">PE</option><option value="PI">PI</option>
+              <option value="RJ">RJ</option><option value="RN">RN</option>
+              <option value="RS">RS</option><option value="RO">RO</option>
+              <option value="RR">RR</option><option value="SC">SC</option>
+              <option value="SP">SP</option><option value="SE">SE</option>
+              <option value="TO">TO</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Cargo / Fun&ccedil;&atilde;o</label>
+          <select name="cargo" required>
+            <option value="">Selecione</option>
+            <option value="secretario">Secret&aacute;rio(a) de Educa&ccedil;&atilde;o</option>
+            <option value="dirigente">Dirigente Municipal de Ensino</option>
+            <option value="coordenador">Coordenador(a) Pedag&oacute;gico</option>
+            <option value="diretor">Diretor(a) de Escola</option>
+            <option value="professor">Professor(a)</option>
+            <option value="assessor">Assessor(a) T&eacute;cnico</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">Acessar Curso Gratuito &rarr;</button>
+      </form>
+      <div class="form-note">Seus dados est&atilde;o seguros. N&atilde;o compartilhamos com terceiros.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3 PILARES ===== -->
+<section class="pillars-section">
+  <div class="pillars-inner">
+    <div class="section-overline">O que voc&ecirc; vai aprender</div>
+    <h2 class="section-title">Tr&ecirc;s pilares para implementar a BNCC Computa&ccedil;&atilde;o na sua rede</h2>
+    <p class="section-subtitle">
+      Um roteiro pr&aacute;tico que vai da legisla&ccedil;&atilde;o &agrave; sala de aula, passando por fontes de financiamento que a maioria dos gestores desconhece.
+    </p>
+
+    <div class="pillars-grid">
+
+      <!-- Pilar 1 -->
+      <div class="pillar-card">
+        <div class="pillar-icon">&#9670;</div>
+        <h3 class="pillar-title">Entendimento das Regras</h3>
+        <p class="pillar-desc">Normas, prazos e obriga&ccedil;&otilde;es legais que impactam diretamente o or&ccedil;amento e a conformidade do munic&iacute;pio.</p>
+        <ul class="pillar-topics">
+          <li>Resolu&ccedil;&atilde;o CNE/CP n&ordm; 1/2022</li>
+          <li>Compet&ecirc;ncias de Pensamento Computacional</li>
+          <li>Prazo de implementa&ccedil;&atilde;o 2026</li>
+          <li>Impacto no VAAR e FUNDEB</li>
+        </ul>
+      </div>
+
+      <!-- Pilar 2 -->
+      <div class="pillar-card">
+        <div class="pillar-icon">&#9881;</div>
+        <h3 class="pillar-title">Como Aplicar</h3>
+        <p class="pillar-desc">Estrat&eacute;gias de implementa&ccedil;&atilde;o realistas para diferentes realidades de infraestrutura e forma&ccedil;&atilde;o.</p>
+        <ul class="pillar-topics">
+          <li>Modelos de curr&iacute;culo integrado</li>
+          <li>Computa&ccedil;&atilde;o desplugada</li>
+          <li>Forma&ccedil;&atilde;o de professores</li>
+          <li>Plano municipal de implementa&ccedil;&atilde;o</li>
+        </ul>
+      </div>
+
+      <!-- Pilar 3 -->
+      <div class="pillar-card">
+        <div class="pillar-icon">$</div>
+        <h3 class="pillar-title">Capta&ccedil;&atilde;o de Recursos</h3>
+        <p class="pillar-desc">Fontes de financiamento federais, estaduais e privadas para viabilizar a implementa&ccedil;&atilde;o sem comprometer o or&ccedil;amento.</p>
+        <ul class="pillar-topics">
+          <li>PDDE Interativo e emendas</li>
+          <li>Editais FNDE e MEC</li>
+          <li>Parcerias com setor privado</li>
+          <li>Conv&ecirc;nios e termos de colabora&ccedil;&atilde;o</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== URGENCY BAR ===== -->
+<section class="urgency-bar">
+  <div class="urgency-inner">
+    <div class="urgency-numbers">
+      <div class="urgency-item">
+        <div class="urgency-num">2026</div>
+        <div class="urgency-label">Implementa&ccedil;&atilde;o obrigat&oacute;ria</div>
+      </div>
+      <div class="urgency-item">
+        <div class="urgency-num">2,5%</div>
+        <div class="urgency-label">do FUNDEB em risco (VAAR)</div>
+      </div>
+      <div class="urgency-item">
+        <div class="urgency-num">70%</div>
+        <div class="urgency-label">das redes ainda n&atilde;o come&ccedil;aram</div>
+      </div>
+    </div>
+    <p class="urgency-text">
+      &ldquo;Se sua rede est&aacute; entre os 70% que ainda n&atilde;o incorporaram Computa&ccedil;&atilde;o ao curr&iacute;culo, este curso vai mostrar exatamente o que fazer, com que dinheiro, e como fazer a tempo.&rdquo;
+    </p>
+    <a href="#inscreva-se" class="urgency-cta">Garantir minha vaga &rarr;</a>
+  </div>
+</section>
+
+<!-- ===== ABOUT i10 ===== -->
+<section class="about-section">
+  <div class="about-inner">
+    <div class="about-text-block">
+      <div class="section-overline">Sobre o Instituto</div>
+      <h2 class="section-title">i10 &mdash; Orquestrando o Futuro da Educa&ccedil;&atilde;o P&uacute;blica</h2>
+      <p>
+        O Instituto i10 &eacute; uma <strong>Institui&ccedil;&atilde;o Cient&iacute;fica, Tecnol&oacute;gica e de Inova&ccedil;&atilde;o (ICT)</strong> que conecta intelig&ecirc;ncia artificial, pesquisa e gest&atilde;o educacional.
+      </p>
+      <p>
+        Atuamos com secret&aacute;rios de educa&ccedil;&atilde;o, escolas, professores, alunos e fam&iacute;lias para transformar a educa&ccedil;&atilde;o p&uacute;blica brasileira com <strong>tecnologia e evid&ecirc;ncias</strong>.
+      </p>
+      <p>
+        IA n&atilde;o &eacute; magia &mdash; &eacute; ferramenta a servi&ccedil;o do professor. Tecnologia que transforma a sala de aula, respeitando a diversidade de cada escola.
+      </p>
+    </div>
+    <div class="about-features">
+      <div class="about-feature">
+        <div class="about-feature-icon">&#127891;</div>
+        <div class="about-feature-title">Secret&aacute;rios de Educa&ccedil;&atilde;o</div>
+        <div class="about-feature-desc">Apoio estrat&eacute;gico para gest&atilde;o de pol&iacute;tica educacional digital</div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">&#127979;</div>
+        <div class="about-feature-title">Escolas</div>
+        <div class="about-feature-desc">Implementa&ccedil;&atilde;o pr&aacute;tica no ch&atilde;o da escola</div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">&#128105;&#8205;&#127979;</div>
+        <div class="about-feature-title">Professores</div>
+        <div class="about-feature-desc">Forma&ccedil;&atilde;o continuada em pensamento computacional</div>
+      </div>
+      <div class="about-feature">
+        <div class="about-feature-icon">&#128640;</div>
+        <div class="about-feature-title">Alunos &amp; Fam&iacute;lias</div>
+        <div class="about-feature-desc">Engajamento no processo de transforma&ccedil;&atilde;o digital</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer-gradient"></div>
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="i">i</span><span class="t">10</span></div>
+      <div class="footer-inst">INSTITUTO</div>
+    </div>
+    <div class="footer-right">
+      Instituto i10 &mdash; ICT<br>
+      Florian&oacute;polis, SC &mdash; Brasil<br>
+      institutoi10.org.br
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

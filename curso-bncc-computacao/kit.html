@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit Pratico — BNCC Computacao | Instituto i10</title>
+<style>
+:root {
+  --primary: #1a365d;
+  --primary-light: #2b6cb0;
+  --accent: #e53e3e;
+  --green: #38a169;
+  --yellow: #d69e2e;
+  --orange: #dd6b20;
+  --bg: #f7fafc;
+  --card: #ffffff;
+  --text: #1a202c;
+  --text-light: #718096;
+  --border: #e2e8f0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.7;
+}
+
+.header {
+  background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+  color: white; padding: 40px; text-align: center;
+  position: sticky; top: 0; z-index: 50;
+}
+.header h1 { font-size: 1.8em; margin-bottom: 8px; }
+.header p { opacity: 0.8; }
+
+.nav-tabs {
+  display: flex; justify-content: center; gap: 8px;
+  padding: 16px 20px; background: white;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 49;
+  flex-wrap: wrap;
+}
+.nav-tab {
+  padding: 10px 20px; border-radius: 8px; border: 2px solid var(--border);
+  background: white; cursor: pointer; font-weight: 600; font-size: 0.9em;
+  transition: all 0.2s; text-decoration: none; color: var(--text);
+}
+.nav-tab:hover { border-color: var(--primary-light); color: var(--primary); }
+.nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+.section { margin-bottom: 60px; padding-top: 20px; }
+.section h1 {
+  font-size: 1.8em; color: var(--primary); margin-bottom: 8px;
+  padding-bottom: 12px; border-bottom: 3px solid var(--primary);
+}
+.section h2 { font-size: 1.3em; color: var(--primary); margin: 24px 0 12px; }
+.section h3 { font-size: 1.1em; color: var(--primary-light); margin: 16px 0 8px; }
+
+.meta-box {
+  background: white; border-radius: 12px; padding: 24px;
+  border: 1px solid var(--border); margin: 20px 0;
+}
+.meta-box label {
+  display: block; font-weight: 600; font-size: 0.9em;
+  color: var(--text-light); margin-bottom: 4px; margin-top: 12px;
+}
+.meta-box label:first-child { margin-top: 0; }
+.meta-box input, .meta-box select {
+  width: 100%; padding: 10px 14px; border: 1px solid var(--border);
+  border-radius: 8px; font-size: 1em; font-family: inherit;
+}
+.meta-box input:focus, .meta-box select:focus {
+  outline: none; border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(43,108,176,0.1);
+}
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.95em;
+}
+th {
+  background: var(--primary); color: white; padding: 10px 14px;
+  text-align: left; font-weight: 600;
+}
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+tr:nth-child(even) { background: #f7fafc; }
+
+.check-group {
+  background: white; border-radius: 12px; padding: 24px;
+  border: 1px solid var(--border); margin: 16px 0;
+}
+.check-group h3 {
+  margin: 0 0 16px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+.check-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid #f0f0f0;
+}
+.check-item:last-child { border: none; }
+.check-item input[type="checkbox"] {
+  width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0;
+  accent-color: var(--green);
+}
+.check-item label { cursor: pointer; flex: 1; }
+
+.score-box {
+  background: white; border-radius: 12px; padding: 24px;
+  border: 2px solid var(--primary); margin: 24px 0; text-align: center;
+}
+.score-box .total {
+  font-size: 3em; font-weight: 800; color: var(--primary);
+}
+.score-box .max { font-size: 1.5em; color: var(--text-light); }
+
+.rating-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid #f0f0f0;
+}
+.rating-row:last-child { border: none; }
+.rating-row .item-text { flex: 1; }
+.rating-row .rating-btns { display: flex; gap: 4px; }
+.rating-btn {
+  width: 36px; height: 36px; border-radius: 8px; border: 2px solid var(--border);
+  background: white; cursor: pointer; font-weight: 700; font-size: 0.9em;
+  transition: all 0.2s; color: var(--text);
+}
+.rating-btn:hover { border-color: var(--primary-light); }
+.rating-btn.selected {
+  background: var(--primary); color: white; border-color: var(--primary);
+}
+
+.action-row {
+  display: grid; grid-template-columns: auto 1fr 1fr 1fr 1fr;
+  gap: 8px; padding: 8px 0; border-bottom: 1px solid #f0f0f0;
+  align-items: center; font-size: 0.9em;
+}
+.action-row input { padding: 8px; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 0.95em; }
+
+.level-card {
+  padding: 16px; border-radius: 10px; margin: 8px 0;
+}
+.level-card.l1 { background: #fff5f5; border-left: 4px solid var(--accent); }
+.level-card.l2 { background: #fffaf0; border-left: 4px solid var(--orange); }
+.level-card.l3 { background: #fffff0; border-left: 4px solid var(--yellow); }
+.level-card.l4 { background: #f0fff4; border-left: 4px solid var(--green); }
+
+.resource-card {
+  background: white; border-radius: 12px; padding: 24px;
+  border: 1px solid var(--border); margin: 20px 0;
+}
+.resource-card h3 { color: var(--primary); margin-bottom: 8px; }
+
+.pill {
+  display: inline-block; padding: 4px 12px; border-radius: 50px;
+  font-size: 0.8em; font-weight: 600;
+}
+.pill.red { background: #fed7d7; color: #c53030; }
+.pill.green { background: #c6f6d5; color: #276749; }
+.pill.blue { background: #bee3f8; color: #2a4365; }
+.pill.yellow { background: #fefcbf; color: #975a16; }
+.pill.orange { background: #feebc8; color: #c05621; }
+
+.print-btn {
+  position: fixed; bottom: 20px; right: 20px;
+  background: var(--primary); color: white; border: none;
+  padding: 14px 24px; border-radius: 10px; cursor: pointer;
+  font-size: 1em; font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  z-index: 100; transition: all 0.2s;
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,0,0,0.3); }
+
+.footer {
+  text-align: center; padding: 40px; color: var(--text-light);
+  border-top: 1px solid var(--border); font-size: 0.9em;
+}
+
+@media print {
+  .header, .nav-tabs, .print-btn { display: none; }
+  .section { page-break-before: always; }
+  .container { max-width: 100%; padding: 20px; }
+  body { background: white; }
+}
+
+@media (max-width: 768px) {
+  .meta-grid { grid-template-columns: 1fr; }
+  .action-row { grid-template-columns: 1fr; }
+  .rating-row { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Kit Pratico &mdash; BNCC Computacao na Pratica</h1>
+  <p>Instituto i10 &mdash; Programa de Capacitacao em Politica Educacional Digital</p>
+</div>
+
+<div class="nav-tabs">
+  <a href="#checklist" class="nav-tab active" onclick="activateTab(this)">Checklist</a>
+  <a href="#plano" class="nav-tab" onclick="activateTab(this)">Plano Municipal</a>
+  <a href="#recursos" class="nav-tab" onclick="activateTab(this)">Fontes de Recursos</a>
+  <a href="#diagnostico" class="nav-tab" onclick="activateTab(this)">Autodiagnostico</a>
+</div>
+
+<button class="print-btn" onclick="window.print()">&#128424; Imprimir / PDF</button>
+
+<div class="container">
+
+<!-- ==================== CHECKLIST ==================== -->
+<div class="section" id="checklist">
+  <h1>Checklist de Conformidade &mdash; BNCC Computacao</h1>
+
+  <div class="meta-box">
+    <div class="meta-grid">
+      <div><label>Municipio</label><input type="text" placeholder="Nome do municipio"></div>
+      <div><label>Estado</label><input type="text" placeholder="UF"></div>
+      <div><label>Secretario(a)</label><input type="text" placeholder="Nome completo"></div>
+      <div><label>Data</label><input type="date"></div>
+      <div><label>N. de escolas</label><input type="number" placeholder="0"></div>
+      <div><label>N. de alunos</label><input type="number" placeholder="0"></div>
+    </div>
+  </div>
+
+  <p>Marque os itens ja atendidos. Ao final, o sistema calcula automaticamente sua conformidade.</p>
+
+  <div class="check-group" data-group="curriculo">
+    <h3>1. Curriculo e Referencial Curricular <span class="pill blue" id="score-curriculo">0/13</span></h3>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Referencial curricular municipal menciona BNCC Computacao</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Eixo Pensamento Computacional contemplado</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Eixo Mundo Digital contemplado</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Eixo Cultura Digital contemplado</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Progressao por ano escolar definida</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Aprovado pelo Conselho Municipal de Educacao</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Documento formal publicado (portaria/resolucao)</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Modelo de insercao definido (proprio/transversal/hibrido)</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Carga horaria ou disciplinas integradoras definidas</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Materiais de orientacao para professores</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Banco de atividades por eixo e etapa</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Atividades de computacao desplugada mapeadas</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="curriculo"><label>Materiais alinhados ao referencial municipal</label></div>
+  </div>
+
+  <div class="check-group" data-group="formacao">
+    <h3>2. Formacao Docente <span class="pill green" id="score-formacao">0/14</span></h3>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Diagnostico de competencia digital dos professores realizado</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Percentual de professores com formacao mapeado</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Necessidades formativas por etapa identificadas</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Programa de formacao em BNCC Computacao existe</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Programa contempla os 3 eixos</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Formacao especifica em computacao desplugada</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Calendario de formacao 2026 definido</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Formacao pratica (nao apenas teorica)</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Multiplicadores designados (1 por escola/grupo)</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Multiplicadores com formacao aprofundada</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Mecanismo de acompanhamento de multiplicadores</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Formacoes documentadas (listas, certificados)</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Registro de carga horaria por professor</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="formacao"><label>Registros utilizaveis como evidencia</label></div>
+  </div>
+
+  <div class="check-group" data-group="infra">
+    <h3>3. Infraestrutura <span class="pill yellow" id="score-infra">0/12</span></h3>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Percentual de escolas com internet mapeado</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Internet adequada para uso pedagogico</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>WiFi atende demanda simultanea</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Adesao ao PIEC realizada</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Inventario de equipamentos por escola</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Relacao aluno/dispositivo mapeada</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Plano de aquisicao de equipamentos</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Ata FNDE consultada para compras</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Salas com projetor ou TV</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Suporte tecnico disponivel</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Responsavel por TI na secretaria</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="infra"><label>Procedimento de manutencao de equipamentos</label></div>
+  </div>
+
+  <div class="check-group" data-group="gestao">
+    <h3>4. Gestao e Governanca <span class="pill orange" id="score-gestao">0/12</span></h3>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Responsavel designado para BNCC Computacao</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Comissao/grupo de trabalho criado</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Articulacao com setor de curriculo</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Articulacao com setor de tecnologia</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Articulacao com rede estadual</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Plano municipal de implementacao existe</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Plano tem metas e cronograma</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Plano identifica fontes de recurso</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Plano compartilhado com diretores</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Previsao orcamentaria 2026</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Fontes externas identificadas</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="gestao"><label>Impacto do VAAR calculado</label></div>
+  </div>
+
+  <div class="check-group" data-group="monitor">
+    <h3>5. Monitoramento e Compliance <span class="pill red" id="score-monitor">0/10</span></h3>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Indicadores de implementacao definidos</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Indicadores cobrem curriculo, formacao, infra, aprendizagem</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Meta quantitativa para cada indicador</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Mecanismo de coleta de dados existe</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Dados coletados com regularidade</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Plataforma/sistema para consolidar dados</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Registros de aulas com computacao mantidos</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Comprovacao ao MEC possivel</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Relatorios periodicos de andamento</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="monitor"><label>Dados organizados para auditoria/VAAR</label></div>
+  </div>
+
+  <div class="check-group" data-group="inclusao">
+    <h3>6. Inclusao e Acessibilidade <span class="pill blue" id="score-inclusao">0/5</span></h3>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="inclusao"><label>Materiais desplugados acessiveis a alunos com deficiencia</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="inclusao"><label>Conteudos em Libras ou audio (onde aplicavel)</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="inclusao"><label>Plataforma com criterios de acessibilidade</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="inclusao"><label>Dados desagregados de alunos com deficiencia</label></div>
+    <div class="check-item"><input type="checkbox" class="chk" data-g="inclusao"><label>Formacao docente inclui abordagem inclusiva</label></div>
+  </div>
+
+  <div class="score-box">
+    <p style="color:var(--text-light);margin-bottom:8px">CONFORMIDADE TOTAL</p>
+    <span class="total" id="totalScore">0</span>
+    <span class="max"> / 66</span>
+    <p style="margin-top:12px;font-size:1.1em" id="levelText">Preencha os itens acima</p>
+  </div>
+
+  <div class="level-card l1"><strong>0-15 itens &mdash; Nivel 1 (Inicial):</strong> Risco alto de desconformidade e perda de VAAR.</div>
+  <div class="level-card l2"><strong>16-35 itens &mdash; Nivel 2 (Em desenvolvimento):</strong> Avancos pontuais, lacunas criticas.</div>
+  <div class="level-card l3"><strong>36-52 itens &mdash; Nivel 3 (Implementado):</strong> Boa conformidade, ajustes necessarios.</div>
+  <div class="level-card l4"><strong>53-66 itens &mdash; Nivel 4 (Consolidado):</strong> Conformidade plena.</div>
+</div>
+
+<!-- ==================== PLANO ==================== -->
+<div class="section" id="plano">
+  <h1>Plano Municipal de Implementacao &mdash; BNCC Computacao</h1>
+
+  <div class="meta-box">
+    <h3>Dados do Municipio</h3>
+    <div class="meta-grid">
+      <div><label>Municipio</label><input type="text" placeholder="Nome"></div>
+      <div><label>Estado</label><input type="text" placeholder="UF"></div>
+      <div><label>Secretario(a)</label><input type="text" placeholder="Nome"></div>
+      <div><label>Responsavel pela implementacao</label><input type="text" placeholder="Nome"></div>
+      <div><label>Total de escolas</label><input type="number" placeholder="0"></div>
+      <div><label>Total de professores</label><input type="number" placeholder="0"></div>
+      <div><label>Total de alunos</label><input type="number" placeholder="0"></div>
+      <div><label>Data de elaboracao</label><input type="date"></div>
+    </div>
+  </div>
+
+  <h2>Modelo de Insercao Curricular</h2>
+  <div class="meta-box">
+    <label>Modelo escolhido</label>
+    <select>
+      <option>Selecione...</option>
+      <option>Componente Curricular Proprio</option>
+      <option>Integracao Transversal</option>
+      <option>Hibrido (Recomendado)</option>
+    </select>
+    <label>Justificativa</label>
+    <input type="text" placeholder="Por que este modelo?">
+  </div>
+
+  <h2>Metas para 2026</h2>
+  <div class="meta-box">
+    <label>Meta 1 &mdash; Curriculo</label>
+    <input type="text" placeholder="Ex: Adequar 100% do referencial curricular ate marco/2026">
+    <label>Meta 2 &mdash; Formacao</label>
+    <input type="text" placeholder="Ex: Formar 1 multiplicador por escola ate junho/2026">
+    <label>Meta 3 &mdash; Implementacao</label>
+    <input type="text" placeholder="Ex: 100% das escolas com computacao desplugada ate setembro/2026">
+    <label>Meta 4 &mdash; Infraestrutura</label>
+    <input type="text" placeholder="Ex: Aderir ao PDDE e PIEC ate fevereiro/2026">
+    <label>Meta 5 &mdash; Compliance</label>
+    <input type="text" placeholder="Ex: Painel de monitoramento operacional ate outubro/2026">
+  </div>
+
+  <h2>Plano de Acao por Trimestre</h2>
+
+  <h3>1o Trimestre &mdash; Fundacao</h3>
+  <table>
+    <tr><th>#</th><th>Acao</th><th>Responsavel</th><th>Prazo</th></tr>
+    <tr><td>1.1</td><td><input type="text" placeholder="Designar responsavel" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent" placeholder="Semana 1"></td></tr>
+    <tr><td>1.2</td><td><input type="text" placeholder="Formar comissao" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>1.3</td><td><input type="text" placeholder="Revisar curriculo" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>1.4</td><td><input type="text" placeholder="Aderir PDDE/PIEC" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>1.5</td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+  </table>
+
+  <h3>2o Trimestre &mdash; Piloto</h3>
+  <table>
+    <tr><th>#</th><th>Acao</th><th>Responsavel</th><th>Prazo</th></tr>
+    <tr><td>2.1</td><td><input type="text" placeholder="Selecionar escolas piloto" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>2.2</td><td><input type="text" placeholder="Iniciar formacao multiplicadores" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>2.3</td><td><input type="text" placeholder="Computacao desplugada nos anos iniciais" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>2.4</td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>2.5</td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+  </table>
+
+  <h3>3o Trimestre &mdash; Expansao</h3>
+  <table>
+    <tr><th>#</th><th>Acao</th><th>Responsavel</th><th>Prazo</th></tr>
+    <tr><td>3.1</td><td><input type="text" placeholder="Expandir para toda a rede" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>3.2</td><td><input type="text" placeholder="Implantar plataforma" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>3.3</td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>3.4</td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+  </table>
+
+  <h3>4o Trimestre &mdash; Consolidacao</h3>
+  <table>
+    <tr><th>#</th><th>Acao</th><th>Responsavel</th><th>Prazo</th></tr>
+    <tr><td>4.1</td><td><input type="text" placeholder="Relatorio anual" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>4.2</td><td><input type="text" placeholder="Compliance VAAR" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>4.3</td><td><input type="text" placeholder="Planejar 2027" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+    <tr><td>4.4</td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td><td><input type="text" style="width:100%;border:none;background:transparent"></td></tr>
+  </table>
+</div>
+
+<!-- ==================== RECURSOS ==================== -->
+<div class="section" id="recursos">
+  <h1>Guia de Fontes de Recursos</h1>
+  <p>As principais fontes de financiamento para implementar a BNCC Computacao na sua rede municipal.</p>
+
+  <div class="resource-card" style="border-left:4px solid var(--accent)">
+    <h3>1. FUNDEB / VAAR <span class="pill red">URGENTE</span></h3>
+    <p><strong>O que e:</strong> 2,5% da complementacao do FUNDEB distribuido por resultado. Redes sem BNCC Computacao podem perder esse recurso.</p>
+    <p><strong>Como garantir:</strong> Adequar curriculo + implementar + documentar evidencias.</p>
+    <p><strong>Referencia:</strong> Lei 14.113/2020 (Novo FUNDEB) | fnde.gov.br/financiamento/fundeb</p>
+  </div>
+
+  <div class="resource-card" style="border-left:4px solid var(--orange)">
+    <h3>2. PDDE Educacao Conectada <span class="pill orange">Alta prioridade</span></h3>
+    <p><strong>O que e:</strong> Repasse direto a escola para equipamentos e conectividade.</p>
+    <p><strong>Como acessar:</strong> Secretaria faz adesao no PDDE Interativo &rarr; escola elabora plano &rarr; recurso depositado.</p>
+    <p><strong>Para que:</strong> Internet, dispositivos, software, formacao.</p>
+    <p><strong>Referencia:</strong> pddeinterativo.mec.gov.br</p>
+  </div>
+
+  <div class="resource-card" style="border-left:4px solid var(--orange)">
+    <h3>3. PIEC <span class="pill orange">Alta prioridade</span></h3>
+    <p><strong>O que e:</strong> Internet + uso pedagogico de tecnologias. Exige plano pedagogico.</p>
+    <p><strong>Como acessar:</strong> Adesao da secretaria + diagnostico de conectividade + plano pedagogico.</p>
+    <p><strong>Diferencial:</strong> Municipio com plano de BNCC Computacao tem prioridade.</p>
+    <p><strong>Referencia:</strong> educacaoconectada.mec.gov.br</p>
+  </div>
+
+  <div class="resource-card" style="border-left:4px solid var(--yellow)">
+    <h3>4. Ata Nacional FNDE <span class="pill yellow">Media</span></h3>
+    <p><strong>O que e:</strong> Registro de precos nacional &mdash; compra de equipamentos sem licitacao propria.</p>
+    <p><strong>Itens:</strong> Tablets, chromebooks, notebooks, projetores, kits de robotica.</p>
+    <p><strong>Vantagem:</strong> Preco negociado nacionalmente, processo mais rapido e barato.</p>
+    <p><strong>Referencia:</strong> fnde.gov.br/atas-de-registro-de-precos</p>
+  </div>
+
+  <div class="resource-card" style="border-left:4px solid var(--yellow)">
+    <h3>5. ENEC <span class="pill yellow">Media</span></h3>
+    <p><strong>O que e:</strong> R$ 8,8 bilhoes para conectar 138 mil escolas. 67% ja conectadas.</p>
+    <p><strong>Acao do municipio:</strong> Verificar escolas atendidas, reportar escolas sem conexao, aderir ao PIEC.</p>
+    <p><strong>Referencia:</strong> escolasconectadas.mec.gov.br</p>
+  </div>
+
+  <div class="resource-card" style="border-left:4px solid var(--primary)">
+    <h3>6. Encomenda Tecnologica <span class="pill blue">Estrategica</span></h3>
+    <p><strong>O que e:</strong> Lei 10.973/2004 (Art. 20). Contratacao direta de ICT para PD&amp;I com risco tecnologico. Dispensa licitacao.</p>
+    <p><strong>Quando usar:</strong> Solucao integrada (plataforma + formacao + IA + compliance), adaptacao a realidade local, integracao de sistemas.</p>
+    <p><strong>Requisitos:</strong> Contratada deve ser ICT sem fins lucrativos; risco tecnologico declarado; justificativa tecnica; prestacao de contas.</p>
+    <p><strong>Possibilidade:</strong> Consorcio intermunicipal para Encomenda conjunta (economia de escala).</p>
+    <p><strong>Referencia:</strong> Lei 10.973/2004, Decreto 9.283/2018</p>
+  </div>
+
+  <div class="resource-card" style="border-left:4px solid var(--green)">
+    <h3>7. AVAMEC <span class="pill green">Imediata e gratuita</span></h3>
+    <p><strong>O que e:</strong> Plataforma de formacao docente gratuita do MEC.</p>
+    <p><strong>Para que:</strong> Cursos de competencias digitais, pensamento computacional, uso pedagogico.</p>
+    <p><strong>Vantagem:</strong> Custo zero, certificacao MEC, flexivel, serve como evidencia de formacao.</p>
+    <p><strong>Referencia:</strong> avamec.mec.gov.br</p>
+  </div>
+
+  <h2>Qual fonte para qual necessidade?</h2>
+  <table>
+    <tr><th>Necessidade</th><th>Melhor fonte</th><th>Alternativa</th></tr>
+    <tr><td>Adequar curriculo</td><td>Orcamento proprio (custo minimo)</td><td>&mdash;</td></tr>
+    <tr><td>Formacao basica</td><td>AVAMEC (gratuito)</td><td>PIEC</td></tr>
+    <tr><td>Formacao avancada</td><td>PIEC / Orcamento</td><td>Encomenda Tecnologica</td></tr>
+    <tr><td>Computacao desplugada</td><td>Orcamento (custo baixo)</td><td>PDDE</td></tr>
+    <tr><td>Dispositivos</td><td>Ata FNDE</td><td>PDDE Conectada</td></tr>
+    <tr><td>Conectividade</td><td>ENEC / PIEC</td><td>PDDE</td></tr>
+    <tr><td>Plataforma integrada</td><td>Encomenda Tecnologica</td><td>Licitacao</td></tr>
+    <tr><td>Compliance VAAR</td><td>Encomenda Tecnologica</td><td>Plataforma propria</td></tr>
+  </table>
+</div>
+
+<!-- ==================== DIAGNOSTICO ==================== -->
+<div class="section" id="diagnostico">
+  <h1>Autodiagnostico de Prontidao Digital</h1>
+  <p>Avalie cada item de 1 (inexistente) a 5 (consolidado). Clique no numero correspondente.</p>
+
+  <div class="meta-box">
+    <div class="meta-grid">
+      <div><label>Municipio</label><input type="text" placeholder="Nome"></div>
+      <div><label>Data</label><input type="date"></div>
+    </div>
+  </div>
+
+  <div class="check-group" id="dim-curriculo">
+    <h3>Dimensao 1: Curriculo <span class="pill blue" id="dim-score-1">0/25</span></h3>
+    <div class="rating-row"><span class="item-text">1.1 Referencial curricular menciona competencias computacionais</span><div class="rating-btns" data-dim="1"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">1.2 Os 3 eixos da BNCC Computacao estao contemplados</span><div class="rating-btns" data-dim="1"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">1.3 Progressao por ano escolar definida</span><div class="rating-btns" data-dim="1"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">1.4 Modelo de insercao curricular definido</span><div class="rating-btns" data-dim="1"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">1.5 Materiais de orientacao disponiveis</span><div class="rating-btns" data-dim="1"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+  </div>
+
+  <div class="check-group" id="dim-formacao">
+    <h3>Dimensao 2: Formacao Docente <span class="pill green" id="dim-score-2">0/25</span></h3>
+    <div class="rating-row"><span class="item-text">2.1 Diagnostico de competencias digitais realizado</span><div class="rating-btns" data-dim="2"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">2.2 Programa de formacao em BNCC Computacao existe</span><div class="rating-btns" data-dim="2"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">2.3 Formacao em computacao desplugada realizada</span><div class="rating-btns" data-dim="2"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">2.4 Multiplicadores formados (1 por escola)</span><div class="rating-btns" data-dim="2"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">2.5 Professores se sentem preparados</span><div class="rating-btns" data-dim="2"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+  </div>
+
+  <div class="check-group" id="dim-infra">
+    <h3>Dimensao 3: Infraestrutura <span class="pill yellow" id="dim-score-3">0/25</span></h3>
+    <div class="rating-row"><span class="item-text">3.1 Escolas com internet funcional</span><div class="rating-btns" data-dim="3"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">3.2 Velocidade adequada para uso simultaneo</span><div class="rating-btns" data-dim="3"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">3.3 Dispositivos disponiveis para alunos</span><div class="rating-btns" data-dim="3"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">3.4 Ambientes adequados para tecnologia</span><div class="rating-btns" data-dim="3"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">3.5 Suporte tecnico disponivel</span><div class="rating-btns" data-dim="3"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+  </div>
+
+  <div class="check-group" id="dim-gestao">
+    <h3>Dimensao 4: Gestao <span class="pill orange" id="dim-score-4">0/25</span></h3>
+    <div class="rating-row"><span class="item-text">4.1 Responsavel designado para BNCC Computacao</span><div class="rating-btns" data-dim="4"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">4.2 Plano de implementacao com metas e cronograma</span><div class="rating-btns" data-dim="4"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">4.3 Orcamento previsto ou fontes identificadas</span><div class="rating-btns" data-dim="4"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">4.4 Articulacao com rede estadual</span><div class="rating-btns" data-dim="4"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">4.5 Implementacao inserida no PPA/LDO/LOA</span><div class="rating-btns" data-dim="4"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+  </div>
+
+  <div class="check-group" id="dim-pratica">
+    <h3>Dimensao 5: Pratica Pedagogica <span class="pill red" id="dim-score-5">0/25</span></h3>
+    <div class="rating-row"><span class="item-text">5.1 Atividades de computacao desplugada sendo realizadas</span><div class="rating-btns" data-dim="5"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">5.2 Atividades de programacao em alguma escola</span><div class="rating-btns" data-dim="5"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">5.3 Temas de cultura digital trabalhados em sala</span><div class="rating-btns" data-dim="5"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">5.4 Projetos interdisciplinares com competencias computacionais</span><div class="rating-btns" data-dim="5"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">5.5 Alunos com deficiencia com acesso adaptado</span><div class="rating-btns" data-dim="5"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+  </div>
+
+  <div class="check-group" id="dim-monitor">
+    <h3>Dimensao 6: Monitoramento <span class="pill blue" id="dim-score-6">0/25</span></h3>
+    <div class="rating-row"><span class="item-text">6.1 Indicadores de implementacao definidos</span><div class="rating-btns" data-dim="6"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">6.2 Sistema/plataforma para coletar dados</span><div class="rating-btns" data-dim="6"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">6.3 Registros de atividades de computacao</span><div class="rating-btns" data-dim="6"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">6.4 Relatorios periodicos de andamento</span><div class="rating-btns" data-dim="6"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+    <div class="rating-row"><span class="item-text">6.5 Comprovacao ao MEC possivel (compliance VAAR)</span><div class="rating-btns" data-dim="6"><button class="rating-btn" data-v="1">1</button><button class="rating-btn" data-v="2">2</button><button class="rating-btn" data-v="3">3</button><button class="rating-btn" data-v="4">4</button><button class="rating-btn" data-v="5">5</button></div></div>
+  </div>
+
+  <div class="score-box">
+    <p style="color:var(--text-light);margin-bottom:8px">PRONTIDAO TOTAL</p>
+    <span class="total" id="diagTotal">0</span>
+    <span class="max"> / 150</span>
+    <p style="margin-top:12px;font-size:1.1em" id="diagLevel">Clique nos numeros acima para avaliar</p>
+  </div>
+
+  <div class="level-card l1"><strong>30-52 &mdash; Nivel 1 (Inicial):</strong> Prioridade absoluta: curriculo e sensibilizacao. Risco alto de perda do VAAR.</div>
+  <div class="level-card l2"><strong>53-82 &mdash; Nivel 2 (Em desenvolvimento):</strong> Avancos, mas lacunas criticas. Foco: curriculo + formacao.</div>
+  <div class="level-card l3"><strong>83-112 &mdash; Nivel 3 (Implementado):</strong> Boa base. Foco: sistematizar e expandir.</div>
+  <div class="level-card l4"><strong>113-150 &mdash; Nivel 4 (Consolidado):</strong> Implementacao solida. Foco: melhoria continua e IA.</div>
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <p><strong>Instituto i10</strong> &mdash; Programa de Capacitacao em Politica Educacional Digital</p>
+  <p>Este material e de uso livre para gestores da educacao publica.</p>
+  <p style="margin-top:8px">Precisa de apoio? Solicite um diagnostico personalizado gratuito: <strong>[contato@i10.org.br]</strong></p>
+</div>
+
+<script>
+// CHECKLIST SCORING
+document.querySelectorAll('.chk').forEach(function(cb) {
+  cb.addEventListener('change', updateChecklistScores);
+});
+
+function updateChecklistScores() {
+  var groups = {};
+  document.querySelectorAll('.chk').forEach(function(cb) {
+    var g = cb.dataset.g;
+    if (!groups[g]) groups[g] = { total: 0, checked: 0 };
+    groups[g].total++;
+    if (cb.checked) groups[g].checked++;
+  });
+  var grandTotal = 0;
+  for (var g in groups) {
+    document.getElementById('score-' + g).textContent = groups[g].checked + '/' + groups[g].total;
+    grandTotal += groups[g].checked;
+  }
+  document.getElementById('totalScore').textContent = grandTotal;
+  var el = document.getElementById('levelText');
+  if (grandTotal <= 15) el.textContent = 'Nivel 1 — Inicial (Risco alto)';
+  else if (grandTotal <= 35) el.textContent = 'Nivel 2 — Em desenvolvimento';
+  else if (grandTotal <= 52) el.textContent = 'Nivel 3 — Implementado';
+  else el.textContent = 'Nivel 4 — Consolidado';
+}
+
+// DIAGNOSTIC RATING
+document.querySelectorAll('.rating-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var siblings = this.parentElement.querySelectorAll('.rating-btn');
+    siblings.forEach(function(s) { s.classList.remove('selected'); });
+    this.classList.add('selected');
+    updateDiagScores();
+  });
+});
+
+function updateDiagScores() {
+  var dims = {};
+  document.querySelectorAll('.rating-btns').forEach(function(group) {
+    var d = group.dataset.dim;
+    if (!dims[d]) dims[d] = 0;
+    var sel = group.querySelector('.selected');
+    if (sel) dims[d] += parseInt(sel.dataset.v);
+  });
+  var total = 0;
+  for (var d in dims) {
+    document.getElementById('dim-score-' + d).textContent = dims[d] + '/25';
+    total += dims[d];
+  }
+  document.getElementById('diagTotal').textContent = total;
+  var el = document.getElementById('diagLevel');
+  if (total <= 52) el.textContent = 'Nivel 1 — Inicial';
+  else if (total <= 82) el.textContent = 'Nivel 2 — Em desenvolvimento';
+  else if (total <= 112) el.textContent = 'Nivel 3 — Implementado';
+  else el.textContent = 'Nivel 4 — Consolidado';
+}
+
+// TAB NAVIGATION
+function activateTab(el) {
+  document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+// Highlight active tab on scroll
+window.addEventListener('scroll', function() {
+  var sections = ['checklist','plano','recursos','diagnostico'];
+  var tabs = document.querySelectorAll('.nav-tab');
+  for (var i = sections.length - 1; i >= 0; i--) {
+    var sec = document.getElementById(sections[i]);
+    if (sec && sec.getBoundingClientRect().top <= 150) {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      tabs[i].classList.add('active');
+      break;
+    }
+  }
+});
+</script>
+
+</body>
+</html>

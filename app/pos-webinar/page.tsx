@@ -6,7 +6,7 @@ const MUNICIPIOS = [
   "Araci", "Araraquara", "Araucária", "Barcelos", "Belo Horizonte",
   "Borborema", "Colômbia", "Cruzmaltina", "Curitiba", "Douradoquara",
   "Ereré", "Jaguaruana", "Japurá", "Jundiaí", "Maragogi", "Mariana",
-  "Muqui", "Novo Horizonte", "Onda Verde", "Piên", "Redentora",
+  "Muqui", "Novo Horizonte", "Onda Verde", "Piên", "Prata", "Redentora",
   "Santa Branca", "Santana de Parnaíba", "São José do Rio Preto",
   "São Paulo", "Sobral", "Sorocaba", "Uruburetama",
 ];
@@ -17,7 +17,7 @@ const UF: Record<string, string> = {
   Cruzmaltina: "PR", Curitiba: "PR", Douradoquara: "MG", Ereré: "CE",
   Jaguaruana: "CE", Japurá: "PR", Jundiaí: "SP", Maragogi: "AL",
   Mariana: "MG", Muqui: "ES", "Novo Horizonte": "SP", "Onda Verde": "SP",
-  Piên: "PR", Redentora: "RS", "Santa Branca": "SP",
+  Piên: "PR", Prata: "PB", Redentora: "RS", "Santa Branca": "SP",
   "Santana de Parnaíba": "SP", "São José do Rio Preto": "SP",
   "São Paulo": "SP", Sobral: "CE", Sorocaba: "SP", Uruburetama: "CE",
 };

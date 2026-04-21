@@ -7,6 +7,7 @@ const MUNICIPIOS_PERMITIDOS = [
   "Araraquara",
   "Araucária",
   "Barcelos",
+  "Barretos",
   "Belo Horizonte",
   "Borborema",
   "Colômbia",
@@ -45,7 +46,7 @@ function normalizeTelefone(tel: string): string {
 
 const MUNICIPIO_SLUG: Record<string, string> = {
   "Araci": "araci", "Araraquara": "araraquara", "Araucária": "araucaria",
-  "Barcelos": "barcelos", "Belo Horizonte": "belo-horizonte", "Borborema": "borborema",
+  "Barcelos": "barcelos", "Barretos": "barretos", "Belo Horizonte": "belo-horizonte", "Borborema": "borborema",
   "Colômbia": "colombia", "Cruzmaltina": "cruzmaltina", "Curitiba": "curitiba",
   "Douradoquara": "douradoquara", "Ereré": "erere", "Jaguaruana": "jaguaruana",
   "Japurá": "japura", "Jundiaí": "jundiai", "Maragogi": "maragogi",

@@ -5,7 +5,7 @@ import { useState, FormEvent, ChangeEvent } from "react";
 const MUNICIPIOS = [
   "Araci", "Araraquara", "Araucária", "Barcelos", "Belo Horizonte",
   "Borborema", "Colômbia", "Cruzmaltina", "Curitiba", "Douradoquara",
-  "Ereré", "Jaguaruana", "Japurá", "Jundiaí", "Maragogi", "Mariana",
+  "Barretos", "Ereré", "Jaguaruana", "Japurá", "Jundiaí", "Maragogi", "Mariana",
   "Muqui", "Novo Horizonte", "Onda Verde", "Piên", "Prata", "Redentora",
   "Santa Branca", "Santana de Parnaíba", "São José do Rio Preto",
   "São Paulo", "Sobral", "Sorocaba", "Uruburetama",
@@ -13,7 +13,7 @@ const MUNICIPIOS = [
 
 const UF: Record<string, string> = {
   Araci: "BA", Araraquara: "SP", Araucária: "PR", Barcelos: "AM",
-  "Belo Horizonte": "MG", Borborema: "SP", Colômbia: "SP",
+  Barretos: "SP", "Belo Horizonte": "MG", Borborema: "SP", Colômbia: "SP",
   Cruzmaltina: "PR", Curitiba: "PR", Douradoquara: "MG", Ereré: "CE",
   Jaguaruana: "CE", Japurá: "PR", Jundiaí: "SP", Maragogi: "AL",
   Mariana: "MG", Muqui: "ES", "Novo Horizonte": "SP", "Onda Verde": "SP",

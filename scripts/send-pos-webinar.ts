@@ -80,59 +80,102 @@ export function buildPosWebinarHtml(nome: string): string {
 
   const bodyHtml = `
       <h2 style="color:#0A2463;font-size:24px;margin:0 0 12px;">
-        Olá, ${primeiroNome}!
+        ${primeiroNome}, seus materiais exclusivos estão prontos!
       </h2>
 
       <p style="color:#475569;font-size:15px;line-height:1.7;margin:0 0 20px;">
         Conforme prometido durante o <strong>Webinar BNCC Computação 2026</strong>,
-        preparamos materiais exclusivos para ajudar sua rede municipal na implementação.
+        preparamos um pacote completo de ferramentas para ajudar sua rede municipal
+        na implementação — e garantir que <strong>nenhum recurso fique na mesa</strong>.
       </p>
 
-      <!-- Destaque verde -->
-      <div style="background:#F0FDF4;border:1px solid #22C55E40;border-radius:12px;padding:20px;margin:0 0 24px;">
-        <p style="color:#166534;font-size:15px;margin:0;line-height:1.6;font-weight:600;">
-          Acesse agora sua área exclusiva de participante com todos os materiais.
+      <!-- Alerta vermelho urgência -->
+      <div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:20px;margin:0 0 24px;">
+        <p style="color:#991B1B;font-size:15px;margin:0;line-height:1.6;font-weight:600;">
+          Atenção: redes que não implementarem a BNCC Computação podem perder
+          2,5% do FUNDEB (complementação VAAR). Isso é dinheiro que você
+          <strong>já recebe</strong> e pode deixar de receber.
         </p>
       </div>
 
       <!-- CTA Button -->
       <div style="text-align:center;margin:0 0 28px;">
         <a href="${LANDING_PAGE_URL}"
-           style="display:inline-block;background:#00E5A0;color:#061840;font-weight:700;font-size:16px;padding:14px 36px;border-radius:8px;text-decoration:none;">
-          Acessar Materiais
+           style="display:inline-block;background:#00E5A0;color:#061840;font-weight:700;font-size:17px;padding:16px 44px;border-radius:8px;text-decoration:none;">
+          Acessar Meus Materiais Exclusivos
         </a>
       </div>
 
       <!-- Lista de materiais -->
       <h3 style="color:#0A2463;font-size:17px;margin:0 0 12px;">
-        O que você encontra na sua área exclusiva:
+        O que você vai encontrar:
       </h3>
 
-      <ul style="color:#475569;font-size:14px;line-height:1.9;margin:0 0 24px;padding-left:20px;">
+      <ul style="color:#475569;font-size:14px;line-height:2.0;margin:0 0 24px;padding-left:20px;">
         <li>
-          <strong style="color:#0A2463;">Guia Completo de Implementação BNCC Computação</strong>
+          <strong style="color:#0A2463;">Guia Completo de Implementação</strong>
+          — o documento mais completo do mercado para secretarias municipais
         </li>
         <li>
           <strong style="color:#0A2463;">Checklist de Conformidade</strong>
-          — 69 itens, 6 dimensões
+          — 69 itens em 6 dimensões para verificar sua rede
         </li>
         <li>
-          <strong style="color:#0A2463;">Modelo de Plano Municipal de Implementação</strong>
+          <strong style="color:#0A2463;">Modelo de Plano Municipal</strong>
+          — pronto para personalizar com diagnóstico, metas e orçamento
         </li>
         <li>
-          <strong style="color:#0A2463;">Guia de Fontes de Recursos Financeiros</strong>
+          <strong style="color:#0A2463;">Guia de Fontes de Recursos</strong>
+          — FUNDEB, PDDE, PIEC, Encomenda Tecnológica e mais
         </li>
         <li>
-          <strong style="color:#0A2463;">Autodiagnóstico de Prontidão Digital</strong>
+          <strong style="color:#0A2463;">Autodiagnóstico de Prontidão</strong>
+          — descubra o nível da sua rede em minutos
         </li>
       </ul>
 
-      <!-- Lembrete FUNDEB -->
-      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:0 0 28px;">
-        <p style="color:#475569;font-size:14px;margin:0;line-height:1.6;">
-          Em breve, você também receberá o
-          <strong style="color:#0A2463;">Relatório FUNDEB Personalizado</strong>
-          para o seu município.
+      <!-- Relatório FUNDEB -->
+      <div style="background:#F0FDF4;border:1px solid #22C55E40;border-radius:12px;padding:20px;margin:0 0 28px;">
+        <p style="color:#166534;font-size:15px;margin:0 0 8px;font-weight:700;">
+          Bônus: Relatório FUNDEB Personalizado
+        </p>
+        <p style="color:#166534;font-size:14px;margin:0;line-height:1.6;">
+          Na sua área exclusiva, você pode solicitar um relatório sob medida
+          para o seu município com cenários e oportunidades de captação.
+          <strong>Limitado a 1 por participante.</strong>
+        </p>
+      </div>
+
+      <!-- CTA Button 2 -->
+      <div style="text-align:center;margin:0 0 28px;">
+        <a href="${LANDING_PAGE_URL}#relatorio"
+           style="display:inline-block;background:#0A2463;color:#ffffff;font-weight:700;font-size:15px;padding:14px 36px;border-radius:8px;text-decoration:none;">
+          Solicitar Relatório FUNDEB
+        </a>
+      </div>
+
+      <!-- CTA Consultoria -->
+      <div style="background:linear-gradient(135deg,#0A2463 0%,#00B4D8 100%);border-radius:12px;padding:24px;margin:28px 0;">
+        <h3 style="color:#ffffff;font-size:18px;margin:0 0 10px;">
+          Quer captar ainda mais recursos para sua rede?
+        </h3>
+        <p style="color:rgba(255,255,255,0.85);font-size:14px;line-height:1.7;margin:0 0 16px;">
+          O Instituto i10 oferece <strong>consultoria personalizada</strong> para
+          municípios que querem acelerar a implementação e maximizar a captação
+          de FUNDEB, PDDE, PIEC e Encomenda Tecnológica.
+        </p>
+        <p style="color:rgba(255,255,255,0.85);font-size:14px;line-height:1.7;margin:0 0 16px;">
+          Diagnóstico completo, plano sob medida, formação docente e plataforma
+          de compliance VAAR — tudo integrado.
+        </p>
+        <div style="text-align:center;">
+          <a href="mailto:institutoi10.org@gmail.com?subject=Consultoria%20BNCC%20Computação%20—%20Quero%20saber%20mais"
+             style="display:inline-block;background:#00E5A0;color:#061840;font-weight:700;font-size:15px;padding:14px 32px;border-radius:8px;text-decoration:none;">
+            Quero saber mais sobre a consultoria
+          </a>
+        </div>
+        <p style="color:rgba(255,255,255,0.5);font-size:12px;margin:14px 0 0;text-align:center;">
+          institutoi10.org@gmail.com
         </p>
       </div>
 
@@ -159,17 +202,19 @@ export function buildPosWebinarHtml(nome: string): string {
 
       <!-- Fechamento -->
       <p style="color:#475569;font-size:15px;line-height:1.7;margin:20px 0 8px;">
-        Estamos juntos nessa jornada.
+        Não deixe sua rede ficar para trás. O prazo é 2026 e quem se move
+        primeiro capta mais.
       </p>
 
       <p style="color:#475569;font-size:15px;line-height:1.7;margin:0 0 24px;">
         Um forte abraço,<br>
-        <strong style="color:#0A2463;">Equipe Instituto i10</strong>
+        <strong style="color:#0A2463;">Equipe Instituto i10</strong><br>
+        <span style="color:#94a3b8;font-size:13px;">Orquestrando o Futuro da Educação Pública</span>
       </p>
 
       <p style="color:#94a3b8;font-size:12px;line-height:1.5;margin:24px 0 0;border-top:1px solid #e2e8f0;padding-top:16px;">
-        Você está recebendo este e-mail porque participou do Webinar BNCC
-        Computação 2026.
+        Você está recebendo este e-mail porque se inscreveu no Webinar BNCC
+        Computação 2026 do Instituto i10. Dúvidas? Escreva para institutoi10.org@gmail.com.
       </p>`;
 
   return wrapEmailLayout(bodyHtml);

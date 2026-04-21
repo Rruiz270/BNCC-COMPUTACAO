@@ -13,13 +13,24 @@ interface Subscriber {
   createdAt: string;
 }
 
+interface Download {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  municipio: string;
+  sentAt: string;
+}
+
 export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
+  const [downloads, setDownloads] = useState<Download[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [tab, setTab] = useState<"inscritos" | "downloads">("inscritos");
 
   async function fetchSubscribers(pwd: string) {
     setLoading(true);
@@ -38,6 +49,7 @@ export default function AdminPage() {
       }
 
       setSubscribers(data.subscribers);
+      setDownloads(data.downloads || []);
       setTotal(data.total);
       setAuthenticated(true);
     } catch {
@@ -127,17 +139,62 @@ export default function AdminPage() {
     <div className="min-h-screen bg-bg-gray">
       <header className="bg-navy text-white px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-bold">Inscritos Webinar BNCC</h1>
-          <p className="text-sm text-white/60">{total} inscrito(s)</p>
+          <h1 className="text-lg font-bold">Admin — Webinar BNCC</h1>
+          <p className="text-sm text-white/60">{total} inscrito(s) | {downloads.length} download(s)</p>
         </div>
-        <button
-          onClick={exportCSV}
-          className="px-4 py-2 rounded-lg bg-green text-navy-dark font-semibold text-sm hover:brightness-110 transition-all"
-        >
-          Exportar CSV
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setTab("inscritos")}
+            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${tab === "inscritos" ? "bg-green text-navy-dark" : "bg-white/20 text-white hover:bg-white/30"}`}
+          >
+            Inscritos
+          </button>
+          <button
+            onClick={() => setTab("downloads")}
+            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${tab === "downloads" ? "bg-green text-navy-dark" : "bg-white/20 text-white hover:bg-white/30"}`}
+          >
+            Downloads ({downloads.length})
+          </button>
+          <button
+            onClick={exportCSV}
+            className="px-4 py-2 rounded-lg bg-cyan text-navy-dark font-semibold text-sm hover:brightness-110 transition-all"
+          >
+            Exportar CSV
+          </button>
+        </div>
       </header>
 
+      {tab === "downloads" && (
+        <div className="p-6 overflow-x-auto">
+          <table className="w-full bg-white rounded-xl shadow border border-border text-sm">
+            <thead>
+              <tr className="border-b border-border bg-bg-gray">
+                <th className="text-left px-4 py-3 font-semibold text-text-dark">Nome</th>
+                <th className="text-left px-4 py-3 font-semibold text-text-dark">Email</th>
+                <th className="text-left px-4 py-3 font-semibold text-text-dark">Telefone</th>
+                <th className="text-left px-4 py-3 font-semibold text-text-dark">Município</th>
+                <th className="text-left px-4 py-3 font-semibold text-text-dark">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              {downloads.map((d) => (
+                <tr key={d.id} className="border-b border-border last:border-0 hover:bg-bg-gray/50">
+                  <td className="px-4 py-3 text-text-dark">{d.nome}</td>
+                  <td className="px-4 py-3 text-text-gray">{d.email}</td>
+                  <td className="px-4 py-3 text-text-gray">{d.telefone}</td>
+                  <td className="px-4 py-3 text-text-gray font-semibold">{d.municipio}</td>
+                  <td className="px-4 py-3 text-text-gray whitespace-nowrap">{new Date(d.sentAt).toLocaleString("pt-BR")}</td>
+                </tr>
+              ))}
+              {downloads.length === 0 && (
+                <tr><td colSpan={5} className="px-4 py-8 text-center text-text-gray">Nenhum download ainda.</td></tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {tab === "inscritos" && (
       <div className="p-6 overflow-x-auto">
         <table className="w-full bg-white rounded-xl shadow border border-border text-sm">
           <thead>
@@ -197,6 +254,7 @@ export default function AdminPage() {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   );
 }

@@ -13,14 +13,17 @@ export async function GET(request: Request) {
   }
 
   try {
-    const [subscribers, total] = await Promise.all([
+    const [subscribers, total, downloads] = await Promise.all([
       prisma.inscricao.findMany({
         orderBy: { createdAt: "desc" },
       }),
       prisma.inscricao.count(),
+      prisma.reportDownload.findMany({
+        orderBy: { sentAt: "desc" },
+      }),
     ]);
 
-    return NextResponse.json({ success: true, total, subscribers });
+    return NextResponse.json({ success: true, total, subscribers, downloads });
   } catch {
     return NextResponse.json(
       { success: false, error: "Erro ao buscar inscrições" },

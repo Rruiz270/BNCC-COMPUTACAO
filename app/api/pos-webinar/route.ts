@@ -42,9 +42,25 @@ function normalizeTelefone(tel: string): string {
   return tel.replace(/\D/g, "");
 }
 
+const MUNICIPIO_SLUG: Record<string, string> = {
+  "Araci": "araci", "Araraquara": "araraquara", "Araucária": "araucaria",
+  "Barcelos": "barcelos", "Belo Horizonte": "belo-horizonte", "Borborema": "borborema",
+  "Colômbia": "colombia", "Cruzmaltina": "cruzmaltina", "Curitiba": "curitiba",
+  "Douradoquara": "douradoquara", "Ereré": "erere", "Jaguaruana": "jaguaruana",
+  "Japurá": "japura", "Jundiaí": "jundiai", "Maragogi": "maragogi",
+  "Mariana": "mariana", "Muqui": "muqui", "Novo Horizonte": "novo-horizonte",
+  "Onda Verde": "onda-verde", "Piên": "pien", "Redentora": "redentora",
+  "Santa Branca": "santa-branca", "Santana de Parnaíba": "santana-de-parnaiba",
+  "São José do Rio Preto": "sao-jose-do-rio-preto", "São Paulo": "sao-paulo",
+  "Sobral": "sobral", "Sorocaba": "sorocaba", "Uruburetama": "uruburetama",
+};
+
 function buildReportEmail(nome: string, municipio: string): string {
   const primeiroNome = (nome || "").trim().split(/\s+/)[0] || "educador(a)";
-  const guiaUrl = "https://bncc.institutoi10.com.br/guia-implementacao-bncc/";
+  const baseUrl = "https://www.institutoi10.com.br";
+  const guiaUrl = `${baseUrl}/bncc/guia-implementacao-bncc/`;
+  const slug = MUNICIPIO_SLUG[municipio] || municipio.toLowerCase().replace(/\s+/g, "-");
+  const reportUrl = `${baseUrl}/bncc/fundeb-reports/${slug}.pdf`;
   const instagramUrl = "https://www.instagram.com/institutoi10/";
 
   const bodyHtml = `
@@ -95,12 +111,16 @@ function buildReportEmail(nome: string, municipio: string): string {
       <p style="color:#1E40AF;font-size:16px;margin:0 0 8px;font-weight:700;">
         Relatório FUNDEB Personalizado
       </p>
-      <p style="color:#1E40AF;font-size:14px;margin:0;line-height:1.6;">
-        O relatório personalizado de ${municipio} será preparado pela nossa
-        equipe e enviado diretamente neste e-mail em até <strong>5 dias úteis</strong>.
-        Inclui diagnóstico da rede, cenários de impacto VAAR e oportunidades
-        de captação.
+      <p style="color:#1E40AF;font-size:14px;margin:0 0 16px;line-height:1.6;">
+        Relatório exclusivo de <strong>${municipio}</strong> com diagnóstico da rede,
+        cenários de impacto VAAR e oportunidades de captação de recursos federais.
       </p>
+      <div style="text-align:center;">
+        <a href="${reportUrl}"
+           style="display:inline-block;background:#1E40AF;color:#ffffff;font-weight:700;font-size:15px;padding:12px 32px;border-radius:8px;text-decoration:none;">
+          Baixar Relatório FUNDEB — ${municipio}
+        </a>
+      </div>
     </div>
 
     <!-- O que contém o guia -->

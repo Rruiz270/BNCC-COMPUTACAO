@@ -220,7 +220,35 @@
         <div class="fg">
           <label for="municipio">Município</label>
           <select id="municipio" name="municipio" required>
-            <option value="">Carregando municípios...</option>
+            <option value="">Selecione seu município...</option>
+            <option value="Araci">Araci — BA</option>
+            <option value="Araraquara">Araraquara — SP</option>
+            <option value="Araucária">Araucária — PR</option>
+            <option value="Barcelos">Barcelos — AM</option>
+            <option value="Belo Horizonte">Belo Horizonte — MG</option>
+            <option value="Borborema">Borborema — SP</option>
+            <option value="Colômbia">Colômbia — SP</option>
+            <option value="Cruzmaltina">Cruzmaltina — PR</option>
+            <option value="Curitiba">Curitiba — PR</option>
+            <option value="Douradoquara">Douradoquara — MG</option>
+            <option value="Ereré">Ereré — CE</option>
+            <option value="Jaguaruana">Jaguaruana — CE</option>
+            <option value="Japurá">Japurá — PR</option>
+            <option value="Jundiaí">Jundiaí — SP</option>
+            <option value="Maragogi">Maragogi — AL</option>
+            <option value="Mariana">Mariana — MG</option>
+            <option value="Muqui">Muqui — ES</option>
+            <option value="Novo Horizonte">Novo Horizonte — SP</option>
+            <option value="Onda Verde">Onda Verde — SP</option>
+            <option value="Piên">Piên — PR</option>
+            <option value="Redentora">Redentora — RS</option>
+            <option value="Santa Branca">Santa Branca — SP</option>
+            <option value="Santana de Parnaíba">Santana de Parnaíba — SP</option>
+            <option value="São José do Rio Preto">São José do Rio Preto — SP</option>
+            <option value="São Paulo">São Paulo — SP</option>
+            <option value="Sobral">Sobral — CE</option>
+            <option value="Sorocaba">Sorocaba — SP</option>
+            <option value="Uruburetama">Uruburetama — CE</option>
           </select>
         </div>
         <button type="submit" class="btn-green" id="btnSubmit" style="width:100%;text-align:center;font-size:16px;padding:14px;">
@@ -258,22 +286,6 @@
     const loadingEl = document.getElementById('formLoading');
     const btnSubmit = document.getElementById('btnSubmit');
     const selectMuni = document.getElementById('municipio');
-
-    // Load municipalities from API
-    fetch(API_BASE + '/api/pos-webinar')
-      .then(r => r.json())
-      .then(data => {
-        selectMuni.innerHTML = '<option value="">Selecione seu município...</option>';
-        data.municipios.forEach(m => {
-          const opt = document.createElement('option');
-          opt.value = m;
-          opt.textContent = m;
-          selectMuni.appendChild(opt);
-        });
-      })
-      .catch(() => {
-        selectMuni.innerHTML = '<option value="">Erro ao carregar. Recarregue a página.</option>';
-      });
 
     // Phone mask
     document.getElementById('telefone').addEventListener('input', function(e) {

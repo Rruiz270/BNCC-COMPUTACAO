@@ -20,6 +20,19 @@ model Inscricao {
   @@map("inscricoes")
 }
 
+model ReportDownload {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String
+  telefone  String
+  municipio String
+  sentAt    DateTime @default(now()) @map("sent_at")
+
+  @@unique([email])
+  @@unique([telefone])
+  @@map("report_downloads")
+}
+
 model EmailLembrete {
   id          Int      @id @default(autoincrement())
   reminderId  String   @unique @map("reminder_id")

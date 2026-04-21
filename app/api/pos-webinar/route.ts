@@ -58,7 +58,7 @@ const MUNICIPIO_SLUG: Record<string, string> = {
 function buildReportEmail(nome: string, municipio: string): string {
   const primeiroNome = (nome || "").trim().split(/\s+/)[0] || "educador(a)";
   const baseUrl = "https://www.institutoi10.com.br";
-  const guiaUrl = `${baseUrl}/bncc/guia-implementacao-bncc/`;
+  const guiaUrl = `${baseUrl}/bncc/guia-implementacao-bncc/index.html`;
   const slug = MUNICIPIO_SLUG[municipio] || municipio.toLowerCase().replace(/\s+/g, "-");
   const reportUrl = `${baseUrl}/bncc/fundeb-reports/${slug}.pdf`;
   const instagramUrl = "https://www.instagram.com/institutoi10/";
